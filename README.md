@@ -1,0 +1,1 @@
+# Documents and Scripts used for training whale recognition for Noosphera
