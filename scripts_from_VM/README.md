@@ -25,3 +25,11 @@ All data could be found here on the VM: /data/
   - yolo11n.wt
  
   #NOTE: as of 9/16/2025 the data of KOLOMVERSE + whales are combined and in YOLO11n format. In addition, moost of the images are labeled except around 36k images that are just the background images(negative images).
+
+All the python packages that are needed to run the training on the model are here:
+/data/envs/requirements.txt to create the environment:
+
+python3 -m <name_of_env> ~/myenv
+source ~/<name_of_env>/bin/activate
+pip install -r /data/requirements.txt
+pip list #to verify all the python packages
