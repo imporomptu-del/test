@@ -1,7 +1,7 @@
 name: smoke
 on:
   pull_request:
-    branches: [ master, main ]
+    branches: [ master ]
 jobs:
   smoke:
     runs-on: ubuntu-latest

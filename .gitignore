@@ -1,4 +1,20 @@
-outputs/
-*.pyc
+# venvs
+.venv311/
+.venv*/            # future-proof
+
+# local artifacts
+*.tar.gz
+.DS_Store
+.ipynb_checkpoints/
+
+# repo-local (do not commit)
 __pycache__/
-.venv/
+.ipynb_checkpoints/
+*.pt
+*.tar.gz
+/.venv*/
+outputs/
+/data.yaml
+/data_eval_*.yaml
+../runs/
+../data/

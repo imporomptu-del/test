@@ -1,5 +1,0 @@
-# data.yaml (4 classes you care about)
-path: data
-train: train/images
-val:   val/images
-names: [ship, buoy, fishnet_buoy, lighthouse]   # IDs 0..3
