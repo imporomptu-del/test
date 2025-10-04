@@ -1,0 +1,11 @@
+train: /Users/artem.ponomarev/seaqr/seaqr-devops-automation-robotics/test/data/val_smoke_bal/images
+val: /Users/artem.ponomarev/seaqr/seaqr-devops-automation-robotics/test/data/val_smoke_bal/images
+names:
+- buoy
+- fishnet buoy
+- lighthouse
+- ship
+- wind farm
+- dolphin
+- whale
+- humpback whale

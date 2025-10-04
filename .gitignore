@@ -19,3 +19,8 @@ outputs/
 ../runs/
 ../data/
 configs/data.local.yaml
+# local data & artifacts
+data/
+runs/
+.venv*/
+*.pt
