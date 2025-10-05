@@ -1,28 +1,63 @@
-# venvs
-.venv311/
-.venv*/            # future-proof
-
-# local artifacts
-*.tar.gz
+# --- OS / editors ---
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Python / env / cache ---
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+.dist-info/
+.venv/
+venv/
+.env
+.env.*
+pip-wheel-metadata/
+build/
+dist/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# --- Notebooks ---
 .ipynb_checkpoints/
 
-# repo-local (do not commit)
-__pycache__/
-.ipynb_checkpoints/
-*.pt
-*.tar.gz
-/.venv*/
-outputs/
-/data.yaml
-/data_eval_*.yaml
-../runs/
-../data/
-configs/data.local.yaml
-# local data & artifacts
-data/
+# --- ML heavy outputs (never commit) ---
 runs/
-.venv*/
+wandb/
+lightning_logs/
+mlruns/
 *.pt
+*.pth
+*.onnx
+*.engine
+*.plan
+*.trt
+*.ckpt
+*.weights
+*.safetensors
+*.npz
+*.npy
+
+# --- Big media / archives ---
 *.mp4
 *.mkv
+*.mov
+*.avi
+*.tar
+*.tar.gz
+*.zip
+
+# --- Local data (keep only tiny samples/docs) ---
+data/**
+!data/samples/**
+!data/README.md
+
+# --- Local-only configs ---
+configs/data.local.yaml
+data.yaml
