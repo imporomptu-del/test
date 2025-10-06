@@ -1,0 +1,5 @@
+{
+  "source": "/home/artem.ponomarev/seaqr-pr2/runs/predict_whales/eval_29",
+  "labels_dir": "/home/artem.ponomarev/seaqr-pr2/runs/predict_whales/eval_29/labels",
+  "thresholds": {}
+}
