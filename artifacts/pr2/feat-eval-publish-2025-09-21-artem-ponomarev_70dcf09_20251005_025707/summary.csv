@@ -1,0 +1,11 @@
+run,image,n_det,mean_conf
+runs/predict_whales/eval_29,009379360f0987,1,0.510042
+runs/predict_whales/eval_29,02f0606c99c41e,1,0.482403
+runs/predict_whales/eval_29,03693ace450403,1,0.300406
+runs/predict_whales/eval_29,04c75f711c3c8d,1,0.302555
+runs/predict_whales/eval_29,06f002d6ef9274,1,0.500353
+runs/predict_whales/eval_29,070c72998f577c,1,0.70187
+runs/predict_whales/eval_29,07c8b24373e16b,1,0.145735
+runs/predict_whales/eval_29,07fc0ca81132f1,1,0.659445
+runs/predict_whales/eval_29,085204a24f4b4c,1,0.236686
+runs/predict_whales/eval_29,0a0512fe106a3e,1,0.227692

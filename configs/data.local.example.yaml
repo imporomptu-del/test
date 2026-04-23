@@ -1,0 +1,5 @@
+# Local-only example; canonical dataset YAML lives in GCS.
+path: ../data
+train: train/images
+val:   val/images
+# names: [ship, buoy, fishnet_buoy, lighthouse, whale, dolphin, humpback_whale, wind_farm]

@@ -1,0 +1,63 @@
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Python / env / cache ---
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+.dist-info/
+.venv/
+venv/
+.env
+.env.*
+pip-wheel-metadata/
+build/
+dist/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+
+# --- ML heavy outputs (never commit) ---
+runs/
+wandb/
+lightning_logs/
+mlruns/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.plan
+*.trt
+*.ckpt
+*.weights
+*.safetensors
+*.npz
+*.npy
+
+# --- Big media / archives ---
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.tar
+*.tar.gz
+*.zip
+
+# --- Local data (keep only tiny samples/docs) ---
+data/**
+!data/samples/**
+!data/README.md
+
+# --- Local-only configs ---
+configs/data.local.yaml
+data.yaml

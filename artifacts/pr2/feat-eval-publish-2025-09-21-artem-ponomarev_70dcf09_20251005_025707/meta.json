@@ -1,0 +1,7 @@
+{
+  "branch": "feat/eval-publish-2025-09-21-artem-ponomarev",
+  "commit": "70dcf09",
+  "source_runs": [
+    "runs/predict_whales/eval_29"
+  ]
+}
