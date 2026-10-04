@@ -1,0 +1,416 @@
+{
+  "schema": "seaqr.feature-residual-trace.plan.v1",
+  "date": "2026-09-30",
+  "purpose": "Passive correspondence-level diagnosis of the failed fixed candidate, not another candidate or threshold search.",
+  "original_workspace": "/tmp/seaqr_feature_selection_20260929_q4iI5B",
+  "original_freeze_sha256": "9ae62028ca25fe063241e62697cb3578a708078a1b03969061b4736f0c9c6b7e",
+  "original_artifacts": {
+    "0170": {
+      "execution_receipt": "80419df272d416a4a3b2cc97bff4f8846a18c62b87a19f6a4147b89315417145",
+      "preflight": "9da5e30d4a6cde10480edc43d5c18b4c39cf00aea71fcdde354a4a0a1bad112f",
+      "journal": "ad8be3eb029d2fc0085467276dc929bb62c1db3493adf1cc1abce8e363b639b1",
+      "report": "6b91fe98d24ad48e034ffac49adc9cb0f904c021fad480beb647827aab282dae",
+      "launch": "b4bfe0263c7f6aa216722b70bd909d211c95e26e0e2fc87f75c82bf0e3577a7b"
+    },
+    "0240": {
+      "execution_receipt": "7ffa13ff98eafde74ecb90280efbc931d76b294544d9235e7f4321fe493301fc",
+      "preflight": "4dae5bfc358748b6d9e86ba3b948d2b6642eefe1da537afd2b9c19ac09c02978",
+      "journal": "e2b68391038dcad9a51296b7d6ead996e7436a3381dd0dddfe2216e3a3c9857f",
+      "report": "48d8f472240eb15e3233745ec930f38270b244f7b77e91da85c3ea2a9177e06f",
+      "launch": "c84c212c1d40200dc783924366a2bec422a053f34bd23ede3951e5bb9b6af869"
+    }
+  },
+  "candidate": {
+    "harris_gain": 16,
+    "harris_capacity_policy": "complete_grid",
+    "feature_image_scale": 0.5,
+    "feature_cpu_policy": "batched_exact_v1",
+    "max_features": 384,
+    "max_features_per_cell": 8,
+    "grid_rows": 6,
+    "grid_cols": 8
+  },
+  "sources": {
+    "0170": {
+      "path": "/home/serg/project/camera_reader_sky/srcsky/chunks/chunk_0170.avi",
+      "sha256": "12848c0f0caedd697a3da51776ab1579bd634a7ae94343f8cbd2a8830ee340bc",
+      "frames": 673,
+      "width": 4784,
+      "height": 3190,
+      "fps": 10,
+      "codec": "mjpeg",
+      "pixel_format": "yuvj420p"
+    },
+    "0240": {
+      "path": "/home/serg/project/camera_reader_sky/srcsky/chunks/chunk_0240.avi",
+      "sha256": "2f86f28785e302572a86e23688143edbd7f5f1f65e8a3434b86a427e79c6a585",
+      "frames": 673,
+      "width": 4784,
+      "height": 3190,
+      "fps": 10,
+      "codec": "mjpeg",
+      "pixel_format": "yuvj420p"
+    }
+  },
+  "capture_pairs": {
+    "0170": [
+      4,
+      5,
+      6,
+      34,
+      35,
+      36,
+      100,
+      117,
+      118,
+      119,
+      160,
+      161,
+      162,
+      164,
+      165,
+      166,
+      169,
+      170,
+      171,
+      200,
+      300,
+      321,
+      322,
+      323,
+      400,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      474,
+      475,
+      476,
+      477,
+      478,
+      479,
+      480,
+      481,
+      482,
+      500,
+      501,
+      502,
+      503,
+      526,
+      527,
+      528,
+      600,
+      601,
+      602,
+      613,
+      614,
+      615,
+      640,
+      641,
+      642
+    ],
+    "0240": [
+      100,
+      200,
+      300,
+      343,
+      344,
+      345,
+      400,
+      430,
+      431,
+      432,
+      433,
+      434,
+      435,
+      436,
+      437,
+      438,
+      439,
+      440,
+      441,
+      442,
+      443,
+      444,
+      445,
+      446,
+      447,
+      448,
+      449,
+      450,
+      451,
+      452,
+      453,
+      454,
+      455,
+      456,
+      457,
+      458,
+      459,
+      460,
+      461,
+      462,
+      463,
+      464,
+      500,
+      600
+    ]
+  },
+  "capture_groups": {
+    "0170": {
+      "failed": [
+        5,
+        35,
+        118,
+        161,
+        165,
+        170,
+        322,
+        452,
+        455,
+        475,
+        478,
+        481,
+        502,
+        527,
+        601,
+        614,
+        641
+      ],
+      "adjacent": [
+        4,
+        6,
+        34,
+        36,
+        117,
+        119,
+        160,
+        162,
+        164,
+        166,
+        169,
+        171,
+        321,
+        323,
+        451,
+        453,
+        454,
+        456,
+        474,
+        476,
+        477,
+        479,
+        480,
+        482,
+        501,
+        503,
+        526,
+        528,
+        600,
+        602,
+        613,
+        615,
+        640,
+        642
+      ],
+      "temporal": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600
+      ],
+      "positive": []
+    },
+    "0240": {
+      "failed": [
+        344
+      ],
+      "adjacent": [
+        343,
+        345
+      ],
+      "temporal": [
+        100,
+        200,
+        300,
+        400,
+        500,
+        600
+      ],
+      "positive": [
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464
+      ]
+    }
+  },
+  "capture_pair_counts": {
+    "0170": 56,
+    "0240": 44
+  },
+  "native_input": {
+    "frames_each": 673,
+    "width": 4784,
+    "height": 3190,
+    "bit_depth": 8,
+    "nominal_fps": 10,
+    "frame_stride": 1,
+    "crop": null
+  },
+  "recording": {
+    "fit_facade": "tiny_target.motion.fit_global_motion",
+    "original_fit_calls_per_pair": 1,
+    "same_return_object": true,
+    "new_fits": false,
+    "estimator_method_source_changed": false,
+    "extra_vpi_readbacks": false,
+    "accepted_correspondences": [
+      "previous_points",
+      "current_points",
+      "harris_scores",
+      "forward_backward_error_px"
+    ],
+    "original_fit": [
+      "inlier_mask",
+      "residuals_px",
+      "previous_to_current_matrix",
+      "parameters",
+      "metrics",
+      "rejection_reasons"
+    ],
+    "native_gray_hashes": "Only captured pair inputs; no image data serialized in remote trace.",
+    "limitations": [
+      "LK/status/FB-rejected feature coordinates are not captured; their original aggregate counts remain available.",
+      "Correspondence array indices are pair-local, not feature identities across frames.",
+      "Original residual metrics are RANSAC-inlier-only; keep outliers separate."
+    ]
+  },
+  "parity": {
+    "full_frames_each": 673,
+    "required": "Every non-timing field identical to original full-causal journal; no tolerance or outcome reselection.",
+    "ignored_exact_paths": [
+      [
+        "timings_ms"
+      ],
+      [
+        "motion",
+        "pva_timings_ms"
+      ],
+      [
+        "motion",
+        "motion_fit",
+        "timing_ms"
+      ],
+      [
+        "motion",
+        "warp_timings_ms"
+      ],
+      [
+        "coverage",
+        "detection_ms"
+      ]
+    ],
+    "on_difference": "Preserve failed attempt; do not interpret as equivalent original failure trace."
+  },
+  "preflight": {
+    "per_clip": true,
+    "same_candidate_generated_controls": true,
+    "cpu_parity_cases": 5,
+    "static_translation_flat_controls": 3,
+    "both_before_full_runs": true
+  },
+  "execution": {
+    "workers": 1,
+    "phase_deadline_seconds": 900,
+    "batch_deadline_seconds": 3600,
+    "start_below_celsius": 65,
+    "stop_at_celsius": 75,
+    "automatic_retries": 0,
+    "detached_tmux": true
+  },
+  "diagnostic_summary": {
+    "descriptive_thresholds_px": [
+      0.35,
+      0.75,
+      1
+    ],
+    "grid_rows": 6,
+    "grid_cols": 8,
+    "statistics": [
+      "inlier and outlier residuals",
+      "cell concentration and vector direction",
+      "Harris tied ranks among LK-accepted correspondences only",
+      "forward-backward error vs residual/displacement"
+    ],
+    "groups_overlap": true,
+    "independent_accuracy_claim": false,
+    "model_refitting": false
+  },
+  "local_visual_followup": {
+    "source_sha256_must_match": true,
+    "native_gray_sha256_must_match_trace": true,
+    "pair_ends": {
+      "0170": [
+        451,
+        452,
+        453
+      ],
+      "0240": [
+        343,
+        344,
+        345
+      ]
+    },
+    "selection": "0170 largest saved rejected P90 before trace plus adjacent controls;0240 only rejected pair plus adjacent controls. Exploratory forensic views, not evaluation selection.",
+    "point_crops": "Top three original-fit residual inliers and top three outliers per fixed pair, tie by index; pair-local motion features, not object detections. Keep all accepted-point statistics regardless of display selection.",
+    "native_patch_side_pixels": 23,
+    "patch_metrics": ["native-gray standard deviation and mean", "zero-mean aligned patch RMSE", "gradient structure eigenvalues and anisotropy"],
+    "patch_caveat": "Native-image postprocessing, not the actual PVA pyramid sampling or LK support. Out-of-frame patches remain unavailable, never padded. No independent motion truth or physical-class labels."
+  },
+  "forbidden": [
+    "algorithm/configuration/quality threshold changes",
+    "new production behavior",
+    "RAW16 media",
+    "sealed holdout media",
+    "legacy clip runs",
+    "sudo, clocks, installs or reboot",
+    "rewriting prior reports"
+  ],
+  "production_promotion": false
+}

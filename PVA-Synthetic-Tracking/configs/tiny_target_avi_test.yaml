@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "input": {
+    "source": "video",
+    "path": "/home/serg/project/camera_reader_sky/srcsky/chunks/chunk_0001.avi",
+    "timestamp_policy": "container_rate",
+    "bit_depth": 8,
+    "start_frame": 0,
+    "max_frames": 8,
+    "timestamp_gap_factor": 1.5
+  },
+  "motion": {},
+  "stabilization": {},
+  "background": {},
+  "noise": {},
+  "psf": {},
+  "synthetic_tracking": {},
+  "candidates": {
+    "score_threshold_snr": 8.0,
+    "minimum_support_frames": 4
+  },
+  "tracking": {
+    "position_measurement_sigma_px": 2.0,
+    "velocity_measurement_sigma_px_s": 2.0,
+    "acceleration_process_sigma_px_s2": 3.0,
+    "initial_position_sigma_px": 5.0,
+    "initial_velocity_sigma_px_s": 3.0,
+    "mahalanobis_gate_squared": 16.0,
+    "maximum_position_residual_px": 12.0,
+    "maximum_velocity_residual_px_s": 5.0,
+    "confirmation_independent_hits": 2,
+    "max_missed_windows": 2,
+    "maximum_timestamp_gap_s": 1.0,
+    "measurement_noise_source": "provisional",
+    "max_active_tracks": 512,
+    "evidence_policy": "non_overlapping_frames"
+  },
+  "benchmark": {
+    "random_seed": 75
+  },
+  "output": {}
+}

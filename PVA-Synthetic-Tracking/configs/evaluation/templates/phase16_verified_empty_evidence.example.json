@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "evidence_id": "replace-with-empty-review-id",
+  "evidence_type": "verified_empty_review",
+  "source_sha256": "replace-with-lowercase-sha256-of-recording",
+  "operating_condition_id": "replace-with-shared-condition-id",
+  "reviewer": "replace-with-reviewer",
+  "reviewed_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "method": "Describe complete review method and independent evidence used.",
+  "assertion": "no_point_targets",
+  "reviewed_intervals": [
+    {
+      "first_frame_index": 0,
+      "last_frame_index": 0
+    }
+  ]
+}

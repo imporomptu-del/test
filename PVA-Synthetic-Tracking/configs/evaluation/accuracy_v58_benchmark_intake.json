@@ -1,0 +1,98 @@
+{
+  "schema": "seaqr.accuracy_v58.benchmark_preparation.v1",
+  "stage": "preparation_only_waiting_for_class_supported_sources",
+  "target_definition": "airborne_objects_only",
+  "ready_to_score": false,
+  "scope": {
+    "new_work_is_metadata_only": true,
+    "intended_input_bit_depth": 8,
+    "raw16_allowed": false,
+    "existing_sealed_holdouts_allowed": false,
+    "automatic_media_discovery_allowed": false,
+    "remote_jobs_authorized_by_this_manifest": false,
+    "production_changed": false
+  },
+  "legacy_regression": {
+    "allowed_development_clip_ids": ["0029", "0126", "0055", "0082"],
+    "panel_samples": {"dense": 285, "pilot": 28, "anchor": 24, "compact_light": 8, "grid": 11},
+    "panels_overlap": true,
+    "airborne_class_established": false,
+    "use_as_untouched_validation": false,
+    "result_reference": "results/tiny_target/accuracy_v57_20260926/shadow_01/summary.json"
+  },
+  "proposed_development_coverage": [
+    {"slot_id": "airborne_clear_straight", "desired_background": "clear sky", "desired_motion": "approximately straight", "status": "unfilled_plan_not_truth"},
+    {"slot_id": "airborne_cloud_edge_straight", "desired_background": "cloud boundary", "desired_motion": "approximately straight", "status": "unfilled_plan_not_truth"},
+    {"slot_id": "airborne_clear_turn", "desired_background": "clear sky", "desired_motion": "turn or acceleration", "status": "unfilled_plan_not_truth"},
+    {"slot_id": "airborne_cloud_edge_turn", "desired_background": "cloud boundary", "desired_motion": "turn or acceleration", "status": "unfilled_plan_not_truth"},
+    {"slot_id": "airborne_slow_apparent_motion", "desired_background": "sky or cloud", "desired_motion": "small image displacement", "status": "unfilled_plan_not_truth"},
+    {"slot_id": "airborne_variable_visibility", "desired_background": "variable contrast or partial occlusion", "desired_motion": "complete pass with independently known presence", "status": "unfilled_plan_not_truth"}
+  ],
+  "proposed_nuisance_coverage": [
+    {"slot_id": "fixed_light_brightness_changes", "status": "unfilled_plan_not_truth"},
+    {"slot_id": "documented_ground_vehicle_lights", "status": "unfilled_plan_not_truth"},
+    {"slot_id": "structured_cloud_or_camera_motion", "status": "unfilled_plan_not_truth"}
+  ],
+  "coverage_is_statistically_sufficient_validation": false,
+  "split_policy": {
+    "unit": "recording_session",
+    "adjacent_chunks_may_not_cross_splits": true,
+    "same_encounter_or_recording_may_not_cross_splits": true,
+    "reserve_separate_later_session": true,
+    "reserved_session_inspection_requires_separate_approval": true,
+    "existing_sealed_holdouts_remain_sealed": true
+  },
+  "required_recording_metadata": [
+    "recording_id", "recording_session_id", "development_or_reserved_validation",
+    "original_native_8bit_source_path", "source_sha256", "native_width_height",
+    "frame_count", "pixel_format_and_codec", "capture_timestamps_and_units",
+    "timestamp_provenance_capture_vs_playback", "dropped_or_duplicate_frames",
+    "camera_identity", "optics_and_focus", "exposure_shutter_gain_and_auto_controls",
+    "camera_motion_and_scene_context", "prior_detector_or_overlay_exposure",
+    "explicit_source_access_authorization"
+  ],
+  "class_evidence_requirements": {
+    "event_level_not_whole_video_class": true,
+    "independent_of_detector_output": true,
+    "examples": ["synchronized wider-view recording", "time-linked operator or recording log plus source correspondence"],
+    "required_fields": ["encounter_id", "recording_id", "source_frame_interval", "class_status", "evidence_description", "evidence_reference", "synchronization_method_and_uncertainty", "reviewer", "review_date", "unresolved_disagreements"],
+    "class_status_values": ["supported_airborne", "supported_non_airborne", "unknown_class"],
+    "a_moving_dot_alone_establishes_airborne_class": false,
+    "a_non_airborne_object_proves_the_entire_scope_airborne_negative": false
+  },
+  "annotation_requirements": {
+    "source_only_before_detector_overlays": true,
+    "native_source_coordinate_system": true,
+    "per_frame_visibility_position_uncertainty_and_physical_identity_when_supported": true,
+    "unknown_visibility_is_not_absence": true,
+    "interpolated_positions_may_not_be_truth": true,
+    "source_review_reviewer_exposure_and_adjudication_recorded": true,
+    "labels_frozen_before_scoring": true,
+    "negative_scopes_require_exhaustive_roi_and_time_review": true,
+    "negative_exposure_uses_union_of_reviewed_space_time_not_duplicate_windows": true
+  },
+  "recordings": [],
+  "encounters": [],
+  "verified_negative_scopes": [],
+  "reserved_validation_session_ids": [],
+  "baseline_freeze": {
+    "new_run_code_sha256": null,
+    "new_run_config_sha256": null,
+    "annotation_manifest_sha256": null,
+    "scoring_contract_sha256": null,
+    "comparison_policy": "unchanged_baseline_first_no_candidate_tuning"
+  },
+  "operational_acceptance_limits_not_yet_agreed": {
+    "minimum_airborne_encounter_detection_rate": null,
+    "maximum_false_alarm_event_rate_on_verified_negative_scope": null,
+    "maximum_detection_delay_seconds": null,
+    "maximum_identity_error_rate": null
+  },
+  "blocked_by": [
+    "No newly supplied source with independently supported airborne class.",
+    "No exact exhaustively reviewed airborne-negative scope.",
+    "No complete native-frame visibility/identity annotation packet for new encounters.",
+    "No verified capture timing or drop-accounting package for new footage.",
+    "No source-specific baseline/annotation/scoring freeze or agreed operational limits."
+  ]
+}

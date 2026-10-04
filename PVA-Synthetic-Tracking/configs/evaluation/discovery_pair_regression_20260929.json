@@ -1,0 +1,581 @@
+{
+  "schema": "seaqr.discovery-pair.regression-intake.v1",
+  "date": "2026-09-29",
+  "purpose": "Development regression retention and availability diagnosis after detector-led discovery and human review; not an independent detector accuracy benchmark.",
+  "path_base": "repository_root",
+  "scope": {
+    "allowed_clip_ids": [
+      "0170",
+      "0240"
+    ],
+    "development_only": true,
+    "prior_detector_exposure": true,
+    "untouched_validation": false,
+    "media_access_authorized_by_this_manifest": false,
+    "raw16_allowed": false,
+    "sealed_holdout_access_allowed": false,
+    "production_algorithm_changed": false,
+    "original_reports_modified": false,
+    "legacy_references_modified": false
+  },
+  "recordings": [
+    {
+      "clip_id": "0170",
+      "source_path": "../outputs/seaqr_discovery_pair_20260928/sources/chunk_0170.avi",
+      "source_sha256": "12848c0f0caedd697a3da51776ab1579bd634a7ae94343f8cbd2a8830ee340bc",
+      "source_bytes": 162613430,
+      "frame_count": 673,
+      "frame_index_bounds_inclusive": [
+        0,
+        672
+      ],
+      "native_shape_hw": [
+        3190,
+        4784
+      ],
+      "decoded_luma_bit_depth": 8,
+      "codec": "mjpeg",
+      "pixel_format": "yuvj420p",
+      "nominal_fps": 10,
+      "timestamp_provenance": "Nominal playback timestamps frame_index * 100000000 ns; physical capture cadence, drops and duplicates are not independently established.",
+      "recording_session_id": null,
+      "artifacts": {
+        "journal": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0170/run/frames.jsonl",
+          "sha256": "fcda47c5e61b66293551ba22da8cb730a6aa4d720a66e6514349807b6051f6f8"
+        },
+        "report": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0170/run/report.json",
+          "sha256": "b98c757cec1ac1035ab476f99d07a73630298e378be90c1f1d4349fa2bd9b1f4"
+        },
+        "launch": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0170/run/launch.json",
+          "sha256": "b4bfe0263c7f6aa216722b70bd909d211c95e26e0e2fc87f75c82bf0e3577a7b"
+        },
+        "execution_receipt": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0170/execution_receipt.json",
+          "sha256": "97be14116f2e5e1396c7a50cdfe8bdf38223ddf6294418040065dcb50a05dec7"
+        },
+        "preflight": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0170/preflight.json",
+          "sha256": "e24b1fda9c3665b07da8721b09db19344ca32d0c10d12ab972f317a499945c9a"
+        }
+      }
+    },
+    {
+      "clip_id": "0240",
+      "source_path": "../outputs/seaqr_discovery_pair_20260928/sources/chunk_0240.avi",
+      "source_sha256": "2f86f28785e302572a86e23688143edbd7f5f1f65e8a3434b86a427e79c6a585",
+      "source_bytes": 175156036,
+      "frame_count": 673,
+      "frame_index_bounds_inclusive": [
+        0,
+        672
+      ],
+      "native_shape_hw": [
+        3190,
+        4784
+      ],
+      "decoded_luma_bit_depth": 8,
+      "codec": "mjpeg",
+      "pixel_format": "yuvj420p",
+      "nominal_fps": 10,
+      "timestamp_provenance": "Nominal playback timestamps frame_index * 100000000 ns; physical capture cadence, drops and duplicates are not independently established.",
+      "recording_session_id": null,
+      "artifacts": {
+        "journal": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0240/run/frames.jsonl",
+          "sha256": "5756e2f89a4215b410e843bf2621d243e45ddbb53f1265e788a534f59e6c0cfb"
+        },
+        "report": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0240/run/report.json",
+          "sha256": "fb894d09413b3212db381f862d227c37f627d0c6359ec74fc9cf15938a310401"
+        },
+        "launch": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0240/run/launch.json",
+          "sha256": "c84c212c1d40200dc783924366a2bec422a053f34bd23ede3951e5bb9b6af869"
+        },
+        "execution_receipt": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0240/execution_receipt.json",
+          "sha256": "909866cd206950509090774524a17236c93a85fe404a2bd2e72e14e7a09fc8b4"
+        },
+        "preflight": {
+          "path": "../outputs/seaqr_discovery_pair_20260928/evidence/0240/preflight.json",
+          "sha256": "25993787a809f41cbfb2e6ea9f60825b26d5dbf9b95d09a6f0f58894399a93c9"
+        }
+      }
+    }
+  ],
+  "metadata_bindings": {
+    "original_freeze": {
+      "path": "../outputs/seaqr_discovery_pair_20260928/evidence/freeze.json",
+      "sha256": "49fdf96abe837c0437d2ed679b5f550f5f4981a67281676199887ca60d6231de"
+    },
+    "original_delivery_receipt": {
+      "path": "../outputs/seaqr_discovery_pair_20260928/completion_receipt.json",
+      "sha256": "c47534044ac7c2fc93bac5c2e0bc6a7264b93eb6ab5753ec5ad9d66487c9cf0d"
+    },
+    "original_0240_review_receipt": {
+      "path": "../outputs/seaqr_discovery_pair_20260928/review_0240/receipt.json",
+      "sha256": "fdc19972e6d19bb28bf27bd7d18eaa40dc2f444341af4c3315672a0792d65b0d"
+    },
+    "original_0240_review_selection": {
+      "path": "../outputs/seaqr_discovery_pair_20260928/review_0240/selection.json",
+      "sha256": "f47656aa59852c7445f83e8faa18769d97204105e340fec5b0824ca738927960"
+    }
+  },
+  "execution_history": {
+    "both_inference_receipts_passed": true,
+    "remote_batch_passed": false,
+    "remote_batch_failure": "Remote ffmpeg 4.4.2 did not support fps_mode during rendering, after both inference runs passed.",
+    "local_render_complete": true,
+    "original_delivery_precedes_this_user_class_feedback": true,
+    "original_delivery_zero_confirmed_is_historical_not_a_current_absence_label": true
+  },
+  "legacy_regression": {
+    "clip_ids": [
+      "0029",
+      "0126",
+      "0055",
+      "0082"
+    ],
+    "unchanged": true,
+    "references": [
+      {
+        "path": "configs/evaluation/phase20_accuracy_review_v1.json",
+        "sha256": "a19d5396b9e2e7047e39d56ff6758750f925470ee540034e6424ff5bc1efc284"
+      },
+      {
+        "path": "configs/evaluation/accuracy_v58_benchmark_intake.json",
+        "sha256": "a2f980f364d73a2838611d5f4940f58bf832b30155084296426387828285059e"
+      }
+    ],
+    "new_intake_does_not_relabel_legacy_panels": true
+  },
+  "positive_pass": {
+    "case_id": "0240_user_confirmed_airborne_430_464",
+    "clip_id": "0240",
+    "first_frame": 430,
+    "last_frame_inclusive": 464,
+    "reference_frame_count": 35,
+    "class_status": "user_confirmed_airborne",
+    "class_provenance": {
+      "reviewer": "user",
+      "evidence_reference": "Current task conversation: user identifies chunk 0240 frames 430-464 as definitely airborne.",
+      "review_date": "2026-09-29",
+      "prior_detector_or_overlay_exposure": true,
+      "external_recording_or_independent_class_corroboration_available": false,
+      "statement_scope": "This pass only; not all tracks, frames or the whole clip."
+    },
+    "source_only_review": {
+      "reviewer": "assistant",
+      "reported_review_frames": [
+        430,
+        441,
+        453,
+        464
+      ],
+      "review_surface": "Unmarked native source frames inspected by the parent assistant before this metadata intake.",
+      "independent_per_frame_positions_available": false,
+      "exhaustive_interval_source_review": false,
+      "coarse_scene_checks": {
+        "status": "not_annotated",
+        "reason": "The existing source-only review supplies no frozen coarse scene polygons, manual coordinates or exhaustive absence labels; none are invented here."
+      }
+    },
+    "baseline_identity": {
+      "segment": 13,
+      "polarity": "dark",
+      "track_id": "dark:7238"
+    },
+    "coordinate_provenance": "frozen_baseline_actual_measurements",
+    "coordinate_field": "tracks[].measurement_source_xy",
+    "coordinate_system": "Native source pixel x,y; not filtered source_xy, reference coordinates, interpolated positions or predicted coast positions.",
+    "baseline_journal_reference": "recordings[clip_id=0240].artifacts.journal",
+    "baseline_qualified_measurement_count": 35,
+    "baseline_ready_frame_count": 35,
+    "baseline_reset_count": 0,
+    "independent_per_frame_ground_truth": false,
+    "independent_physical_identity_ground_truth": false,
+    "recall_estimate_available": false,
+    "retention_contract": {
+      "predeclared_before_candidate_run": true,
+      "radius_native_px": 8,
+      "distance": "euclidean_native_source_xy",
+      "boundary": "inclusive",
+      "require_qualified": true,
+      "require_measured": true,
+      "same_polarity": true,
+      "required_polarity": "dark",
+      "primary": "one_coherent_candidate_identity_covers_all_reference_frames",
+      "identity_fields": [
+        "segment",
+        "polarity",
+        "track_id"
+      ],
+      "required_reference_frame_count": 35,
+      "require_baseline_identity_string": false,
+      "missing_unready_or_prediction_only_frames_count_as_retention_misses": true,
+      "secondary_metrics": [
+        "any_identity_covered_frame_count",
+        "frames_with_multiple_qualifying_identities",
+        "qualifying_identity_count_by_frame",
+        "coherent_identity_covered_frame_counts"
+      ],
+      "candidate_evidence_field": "measurement_source_xy",
+      "metric_name": "baseline_derived_qualified_measurement_retention",
+      "not_recall": true,
+      "not_detector_promotion_criterion": true
+    },
+    "baseline_measurements": [
+      {
+        "frame_index": 430,
+        "timestamp_ns": 43000000000,
+        "measurement_source_xy": [
+          2719.6782899774016,
+          2845.7376550513654
+        ]
+      },
+      {
+        "frame_index": 431,
+        "timestamp_ns": 43100000000,
+        "measurement_source_xy": [
+          2727.6737818923725,
+          2843.741419359141
+        ]
+      },
+      {
+        "frame_index": 432,
+        "timestamp_ns": 43200000000,
+        "measurement_source_xy": [
+          2733.670806783361,
+          2840.7437784389017
+        ]
+      },
+      {
+        "frame_index": 433,
+        "timestamp_ns": 43300000000,
+        "measurement_source_xy": [
+          2740.658913250868,
+          2837.7340599774316
+        ]
+      },
+      {
+        "frame_index": 434,
+        "timestamp_ns": 43400000000,
+        "measurement_source_xy": [
+          2749.665118964894,
+          2834.7419817729437
+        ]
+      },
+      {
+        "frame_index": 435,
+        "timestamp_ns": 43500000000,
+        "measurement_source_xy": [
+          2755.6591971353155,
+          2831.743517587806
+        ]
+      },
+      {
+        "frame_index": 436,
+        "timestamp_ns": 43600000000,
+        "measurement_source_xy": [
+          2764.6594185651848,
+          2828.7583562278855
+        ]
+      },
+      {
+        "frame_index": 437,
+        "timestamp_ns": 43700000000,
+        "measurement_source_xy": [
+          2772.665763314999,
+          2824.7344595109957
+        ]
+      },
+      {
+        "frame_index": 438,
+        "timestamp_ns": 43800000000,
+        "measurement_source_xy": [
+          2780.6643524092938,
+          2821.7296561861413
+        ]
+      },
+      {
+        "frame_index": 439,
+        "timestamp_ns": 43900000000,
+        "measurement_source_xy": [
+          2787.6726591451934,
+          2818.731146337151
+        ]
+      },
+      {
+        "frame_index": 440,
+        "timestamp_ns": 44000000000,
+        "measurement_source_xy": [
+          2796.6626726310565,
+          2814.7244048588213
+        ]
+      },
+      {
+        "frame_index": 441,
+        "timestamp_ns": 44100000000,
+        "measurement_source_xy": [
+          2804.663875895565,
+          2811.7168582977165
+        ]
+      },
+      {
+        "frame_index": 442,
+        "timestamp_ns": 44200000000,
+        "measurement_source_xy": [
+          2811.6539048351615,
+          2808.725212670811
+        ]
+      },
+      {
+        "frame_index": 443,
+        "timestamp_ns": 44300000000,
+        "measurement_source_xy": [
+          2821.6456447440155,
+          2804.71821687933
+        ]
+      },
+      {
+        "frame_index": 444,
+        "timestamp_ns": 44400000000,
+        "measurement_source_xy": [
+          2830.6463655401462,
+          2800.7209213180395
+        ]
+      },
+      {
+        "frame_index": 445,
+        "timestamp_ns": 44500000000,
+        "measurement_source_xy": [
+          2839.6522249151462,
+          2797.728185954851
+        ]
+      },
+      {
+        "frame_index": 446,
+        "timestamp_ns": 44600000000,
+        "measurement_source_xy": [
+          2849.64856848346,
+          2792.713107432413
+        ]
+      },
+      {
+        "frame_index": 447,
+        "timestamp_ns": 44700000000,
+        "measurement_source_xy": [
+          2857.653035147168,
+          2789.722884154714
+        ]
+      },
+      {
+        "frame_index": 448,
+        "timestamp_ns": 44800000000,
+        "measurement_source_xy": [
+          2867.650355277982,
+          2785.730648394358
+        ]
+      },
+      {
+        "frame_index": 449,
+        "timestamp_ns": 44900000000,
+        "measurement_source_xy": [
+          2878.650446830716,
+          2780.7272442972344
+        ]
+      },
+      {
+        "frame_index": 450,
+        "timestamp_ns": 45000000000,
+        "measurement_source_xy": [
+          2886.654632486098,
+          2776.7299922356024
+        ]
+      },
+      {
+        "frame_index": 451,
+        "timestamp_ns": 45100000000,
+        "measurement_source_xy": [
+          2896.648932086389,
+          2772.7230725521904
+        ]
+      },
+      {
+        "frame_index": 452,
+        "timestamp_ns": 45200000000,
+        "measurement_source_xy": [
+          2910.641840652886,
+          2766.7258673945776
+        ]
+      },
+      {
+        "frame_index": 453,
+        "timestamp_ns": 45300000000,
+        "measurement_source_xy": [
+          2918.6364375883395,
+          2762.7257467774834
+        ]
+      },
+      {
+        "frame_index": 454,
+        "timestamp_ns": 45400000000,
+        "measurement_source_xy": [
+          2930.6256584958614,
+          2757.706797490601
+        ]
+      },
+      {
+        "frame_index": 455,
+        "timestamp_ns": 45500000000,
+        "measurement_source_xy": [
+          2942.629977459775,
+          2751.7135622204187
+        ]
+      },
+      {
+        "frame_index": 456,
+        "timestamp_ns": 45600000000,
+        "measurement_source_xy": [
+          2953.625270655633,
+          2746.7019839932204
+        ]
+      },
+      {
+        "frame_index": 457,
+        "timestamp_ns": 45700000000,
+        "measurement_source_xy": [
+          2964.616299907086,
+          2741.714017854957
+        ]
+      },
+      {
+        "frame_index": 458,
+        "timestamp_ns": 45800000000,
+        "measurement_source_xy": [
+          2977.608913296843,
+          2734.7166667807387
+        ]
+      },
+      {
+        "frame_index": 459,
+        "timestamp_ns": 45900000000,
+        "measurement_source_xy": [
+          2987.602642289394,
+          2729.7012575329186
+        ]
+      },
+      {
+        "frame_index": 460,
+        "timestamp_ns": 46000000000,
+        "measurement_source_xy": [
+          2998.598358473079,
+          2723.702129058173
+        ]
+      },
+      {
+        "frame_index": 461,
+        "timestamp_ns": 46100000000,
+        "measurement_source_xy": [
+          3009.59574673616,
+          2717.696845968602
+        ]
+      },
+      {
+        "frame_index": 462,
+        "timestamp_ns": 46200000000,
+        "measurement_source_xy": [
+          3025.5932257188365,
+          2710.6901400625216
+        ]
+      },
+      {
+        "frame_index": 463,
+        "timestamp_ns": 46300000000,
+        "measurement_source_xy": [
+          3036.601679087977,
+          2704.688200809148
+        ]
+      },
+      {
+        "frame_index": 464,
+        "timestamp_ns": 46400000000,
+        "measurement_source_xy": [
+          3051.5895458666837,
+          2696.672527548792
+        ]
+      }
+    ]
+  },
+  "diagnostic_cases": [
+    {
+      "case_id": "0170_availability_0_672",
+      "clip_id": "0170",
+      "first_frame": 0,
+      "last_frame_inclusive": 672,
+      "frame_count": 673,
+      "purpose": "Full-clip availability regression; unavailable is not evidence of absence.",
+      "class_status": "unknown",
+      "verified_airborne_negative": false,
+      "false_positive_rate_available": false,
+      "baseline": {
+        "ready_frame_count": 1,
+        "ready_frames": [
+          262
+        ],
+        "unready_frame_count": 672,
+        "reset_count": 627,
+        "candidate_count": 324,
+        "qualified_measurement_count": 0,
+        "qualified_prediction_count": 0,
+        "qualified_identity_count": 0
+      },
+      "pass_fail_thresholds": null
+    },
+    {
+      "case_id": "0240_burst_50_105",
+      "clip_id": "0240",
+      "first_frame": 50,
+      "last_frame_inclusive": 105,
+      "frame_count": 56,
+      "purpose": "Unclassified output-burst diagnostic; compare fixed-window availability, measured/predicted output and identity counts without treating all candidates as false positives.",
+      "mixed_scene_warning": {
+        "provenance": "Parent assistant's source-only clutter review reported in the current task conversation on 2026-09-29.",
+        "observation": "Track dark:744 has 25 actual measurements on frames 64-88 and a compact moving feature was seen in raw source; nearby dark:776 may overlap. Physical class and independent per-frame ground truth are not established.",
+        "entire_burst_is_noise": false,
+        "suppress_all_post_reset_outputs_justified": false,
+        "manual_ground_truth_coordinates_created": false,
+        "shape_or_association_gates_not_justified_here": "The user-confirmed pass itself has a missing shape and an ambiguous association; universal rejection based on either has not been established."
+      },
+      "class_status": "unknown",
+      "verified_airborne_negative": false,
+      "false_positive_rate_available": false,
+      "baseline": {
+        "ready_frame_count": 34,
+        "unready_frame_count": 22,
+        "reset_count": 3,
+        "reset_frames": [
+          56,
+          89,
+          105
+        ],
+        "candidate_count": 5277,
+        "qualified_measurement_count": 144,
+        "qualified_prediction_count": 141,
+        "qualified_identity_count": 50
+      },
+      "pass_fail_thresholds": null
+    }
+  ],
+  "limitations": [
+    "Selection followed detector output and user review; this is a development regression, not held-out validation.",
+    "The 35 coordinates are retained baseline measurements, not independent per-frame ground truth. Preserving 35 anchors is not 35/35 recall.",
+    "A lower output count in the unclassified burst is not established false-positive reduction; any losses need source review.",
+    "No whole-clip or burst negative scope is exhaustively labeled. Unknown objects and unavailable frames are not negatives.",
+    "Candidate tracking identities can change; report coherent identity retention, any-identity coverage and ambiguity separately.",
+    "No aircraft subtype, range, physical trajectory or capture cadence is established by this intake."
+  ]
+}

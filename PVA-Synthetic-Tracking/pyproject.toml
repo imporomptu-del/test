@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seaqr-tiny-target"
+version = "0.1.0"
+description = "PVA stabilization and synthetic-tracking pipeline for SEAQR"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26,<3"]
+
+[project.optional-dependencies]
+yaml = ["PyYAML>=6,<7"]
+vision = ["opencv-python-headless>=4.8,<5"]
+visualization = ["Pillow>=10,<13"]
+
+[project.scripts]
+tiny-target-inspect = "tiny_target.cli:main"
+tiny-target-motion = "tiny_target.motion_cli:main"
+tiny-target-warp-benchmark = "tiny_target.stabilization_benchmark:main"
+tiny-target-preprocessing-benchmark = "tiny_target.preprocessing_benchmark:main"
+tiny-target-matched-filter-benchmark = "tiny_target.matched_filter_benchmark:main"
+tiny-target-synthetic-reference-benchmark = "tiny_target.synthetic_tracking_benchmark:main"
+tiny-target-build-cuda = "tiny_target.cuda_build:main"
+tiny-target-cuda-benchmark = "tiny_target.cuda_tracking_benchmark:main"
+tiny-target-candidate-benchmark = "tiny_target.candidate_benchmark:main"
+tiny-target-clutter-benchmark = "tiny_target.clutter_benchmark:main"
+tiny-target-tracking-benchmark = "tiny_target.tracking_benchmark:main"
+tiny-target-evaluation = "tiny_target.evaluation_benchmark:main"
+tiny-target-hardware-evaluation = "tiny_target.hardware_evaluation:main"
+tiny-target-injected-raw-evaluation = "tiny_target.injected_raw_evaluation:main"
+tiny-target-track-quality-evaluation = "tiny_target.track_quality_evaluation:main"
+tiny-target-evaluation-visualizer = "tiny_target.evaluation_visualizer:main"
+tiny-target-real-data-validation = "tiny_target.real_data_validation:main"
+tiny-target-field-review = "tiny_target.field_review:main"
+tiny-target-dense-screen = "tiny_target.dense_screen:main"
+
+[tool.setuptools.packages.find]
+include = ["tiny_target*"]
+
+[tool.setuptools.package-data]
+"tiny_target.detection" = ["cuda/*.cu"]

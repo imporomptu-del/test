@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "random_seed": 75,
+  "psf_sigma_px": 0.8,
+  "psf_radius_px": 3,
+  "targets": [
+    {"target_id": "upper_control", "flux_dn": 6000.0,
+     "reference_timestamp_ns": 0, "reference_position_xy_px": [1196.25, 531.75],
+     "velocity_xy_px_s": [2.0, 1.0], "first_frame_index": 8, "last_frame_index": 63},
+    {"target_id": "middle_control", "flux_dn": 6000.0,
+     "reference_timestamp_ns": 0, "reference_position_xy_px": [2392.25, 1595.25],
+     "velocity_xy_px_s": [-2.0, 1.0], "first_frame_index": 8, "last_frame_index": 63},
+    {"target_id": "lower_control", "flux_dn": 6000.0,
+     "reference_timestamp_ns": 0, "reference_position_xy_px": [3588.25, 2658.75],
+     "velocity_xy_px_s": [2.0, -1.0], "first_frame_index": 8, "last_frame_index": 63}
+  ]
+}

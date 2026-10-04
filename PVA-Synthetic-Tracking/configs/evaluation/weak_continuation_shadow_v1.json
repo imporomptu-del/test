@@ -1,0 +1,45 @@
+{
+  "schema": "seaqr.weak-continuation-shadow.plan.v1",
+  "purpose": "Bounded closed-loop tracker shadow on unchanged baseline detector inputs; no production promotion or end-to-end learning claim.",
+  "clips": {
+    "0029": {"frames": 687, "source_sha256": "0330bc3e390a793c2bf6afe7b16720ad3cd6bb8943ee162caf9ce6eff800f359", "launch_sha256": "9c35be262ae58fe710ac4020a2f3b0f708c180717c20825d398f4aed1bb47b56", "weak_windows_inclusive": [[70,81],[270,281],[344,355]]},
+    "0126": {"frames": 674, "source_sha256": "c5302b873656793da47f1da3c03f05df595f17c3f9bc407ce0bfd99b7e718344", "launch_sha256": "653c760112f01ebc074e23258104b5a3976aec8114abb26865cf211009c6fe5b", "weak_windows_inclusive": [[16,28],[200,218],[258,270],[289,301],[324,336],[449,461],[478,490],[522,534]]},
+    "0055": {"frames": 689, "source_sha256": "c59abb3dad5c8787aab8a5a86eff466928a918be79a536960a7713d8a5dc539f", "launch_sha256": "b0a99f1cd6b3f05d0703c7d05446ce918d32767e2cc48331049c95c5e68581dc", "weak_windows_inclusive": [[100,111],[300,311],[500,511]]}
+  },
+  "selection": "Previously exposed 0029 encounter windows,0126 known gap plus all seven original workload-control intervals,0055 fixed frame grid. Query all eligible shadow tracks over the full frame in scheduled intervals, not annotation-centered ROIs. Familiar development sampling; not blind or negative-labeled evaluation.",
+  "full_causal_replay": true,
+  "execution_order": ["0029", "0126", "0055"],
+  "arms": ["clean", "shadow"],
+  "concurrent_workers": 1,
+  "detector_inputs": "Independent unchanged v29 combined full-file replays from frame0, serial_reference policy. Baseline alone determines detector learning. Clean/shadow baseline outputs,private states and learning inputs must match exactly.",
+  "shadow": {
+    "initialization": "Independent ordinary VisibleTracks from frame0; own strong associations,births,counters and expiry. Never teacher-force baseline assignments or posteriors.",
+    "eligibility": "Prior strong-qualified existing track left unmatched by shadow strong pass, alive within unchanged last-strong coast deadline.",
+    "weak_budget_per_strong_gap": 1,
+    "weak_measurement_covariance_multiplier": 2.0,
+    "noise_interpretation": "Provisional hypothesis fixed before new outcomes, not empirical raw-peak calibration or identity confidence.",
+    "query": "Inherited45px AND Mahalanobis-squared25 gate using Pprior+Rstrong, unchanged spatial3sigma, raw-absolute5x5 maxima, positive same-polarity centered temporal response below original4sigma threshold.",
+    "acceptance": "Exactly one observed peak total, weak only, complete support and neighborhood coverage, zero other same-polarity prior-owner gates. Veto overlap with any current strong shape support or centroid within max(2px,existing NMS radius).",
+    "weak_changes": "Own mean and covariance only, Joseph update with2*Rstrong. Separate weak_evidence output; measured stays strong-only.",
+    "weak_never_changes": ["births", "strong last-seen timestamp", "missed-window count", "independent hits", "appearance", "motion-quality history", "qualification", "detector learning"],
+    "expiry": "Original strong-only missed-window deletion plus elapsed coast_seconds since last strong observation; weak never rearms expiry or revives a deleted track.",
+    "outside_windows": "Ordinary independent strong tracking continues; weak updates disabled. Counterfactual state is never reset to baseline."
+  },
+  "capture": {
+    "bridge": "Reuse separately frozen V56 read-only native bridge; unchanged production library.",
+    "phase": "After successful prepare, before finish/learning.",
+    "radius_px": 45,
+    "peak_halo_px": 2,
+    "full_tiles": true,
+    "deduplicate_identical_rectangles": true,
+    "max_total_capture_pixels_per_frame": 8000000,
+    "resource_policy": "Abort the run on excess resource bound, never select top-k tracks or silently discard coverage. Missing/out-of-frame coverage explicitly abstains.",
+    "archive": "Persist complete detached snapshots actually requested by unmatched shadow tracks; keep all prior forecasts,strong proposals,decisions and capture geometry. Release all frame snapshots after the shadow step.",
+    "baseline_state_hash_guard": "Hash full exposed native state before and after capture batch. Verify baseline private state and actual learning-input equality against clean arm."
+  },
+  "required_tests": ["No-weak parity", "Independent future strong reassociation after weak update", "Joseph covariance", "Strong priority", "No weak births or hit/learning credit", "One weak correction per strong gap", "Expiry anchored to strong evidence", "Missing or censored coverage", "Multiple peaks and competing tracks", "Strong-support reuse veto", "Identical true-point and disappeared-target-plus-decoy observations receive identical decisions, with false correction honestly reported"],
+  "evaluation": "Separate strong measurement,weak correction and prediction counts; compare strong-association changes,qualified track workload,lifetimes and fixed historical references. Preserve ambiguous/absent assignments. Unlabeled control workload is not a false-positive rate. No promotion from recovering frame216 alone.",
+  "cost": "Record capture/query/shadow overhead separately. Instrumented replay FPS is not production FPS or live latency.",
+  "forbidden": ["RAW16", "sealed holdout media", "global threshold changes", "production source edits", "clock changes", "reboot", "new physical-class claims"],
+  "presentation_baseline": "Unchanged v29 with v34 verified validation."
+}

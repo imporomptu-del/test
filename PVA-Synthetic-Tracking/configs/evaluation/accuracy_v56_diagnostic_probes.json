@@ -1,0 +1,491 @@
+{
+  "schema": "seaqr.accuracy-v56-diagnostic-probes.v1",
+  "schema_version": 1,
+  "experiment": "accuracy_v56_20260926",
+  "clip": "0126",
+  "purpose": "Diagnostic-only causal replay of the existing frame216 candidate-stage absence; no detector repair or promotion.",
+  "source_media": {
+    "path": "/home/serg/project/camera_reader_sky/srcsky/chunks/chunk_0126.avi",
+    "sha256": "c5302b873656793da47f1da3c03f05df595f17c3f9bc407ce0bfd99b7e718344",
+    "input_bit_depth": 8,
+    "codec": "mjpeg",
+    "pixel_format": "yuvj420p",
+    "width": 4784,
+    "height": 3190,
+    "expected_frames": 674,
+    "frame_indices_inclusive": [
+      0,
+      673
+    ],
+    "container_fps": 10,
+    "physical_acquisition_cadence_verified": false,
+    "metadata_source": "results/tiny_target/visible_validation_v34_20260923/audit_20260924/evidence/run/full_repeat0_0126/launch.json"
+  },
+  "execution": {
+    "runner": "scripts/run_visible_combined_v29.py",
+    "arm": "combined",
+    "execution_policy": "serial_reference",
+    "runs_in_order": [
+      "clean",
+      "probe"
+    ],
+    "full_clip_both_runs": true,
+    "expected_frames_per_run": 674,
+    "causal_start_frame": 0,
+    "causal_last_frame": 673,
+    "reset_between_runs": true,
+    "shortened_history_allowed": false,
+    "decode_crops_instead_of_full_frames_allowed": false,
+    "settings_changed": false,
+    "inference_source_changed": false,
+    "annotations_supplied_to_detector": false,
+    "output_equivalence_required_before_diagnostic_interpretation": true,
+    "performance_comparison_claim_allowed": false
+  },
+  "capture": {
+    "reference_frames": [
+      213,
+      214,
+      215,
+      216,
+      217,
+      218
+    ],
+    "control_tile_capture_enabled": false,
+    "phase": "after successful native prepare and before native finish or learning update",
+    "probe_box_radius_px": 7,
+    "original_reference_match_gate_px": 7,
+    "original_reference_match_coordinate_system": "source",
+    "selection": "all full production tiles intersecting the fixed transformed probe box, plus the frozen raw-absolute peak comparison halo",
+    "tile_size_px": 256,
+    "peak_halo_px": 2,
+    "maximum_tile_span_per_axis": 3,
+    "maximum_capture_pixels": 600000,
+    "full_tile_ranking_required": true,
+    "runtime_source_to_reference_transform_required": true,
+    "source_coordinates_are_fixed": true,
+    "recenter_from_detections_or_tracks_allowed": false,
+    "transform_estimated_from_reference_labels_allowed": false,
+    "diagnostic_values_feed_inference": false,
+    "diagnostic_bridge_separate_from_original_library": true,
+    "support_and_out_of_bounds_unknowns_retained": true,
+    "controls_evaluated_from_full_frame_journals": true
+  },
+  "reference_probes": [
+    {
+      "sample_index": 311,
+      "panel": "dense",
+      "clip_id": "0126",
+      "window_id": "126",
+      "frame_index": 213,
+      "source_xy": [
+        3137.77,
+        2712.46
+      ],
+      "position_uncertainty_px": 5,
+      "original_reference_match_gate_px": 7,
+      "polarity": "bright",
+      "saved_evidence_index": 151,
+      "original_candidate_identity": "candidate:52",
+      "original_strict_assigned_identity": "0/bright:1001",
+      "original_measured_alternatives": [
+        {
+          "identity": "0/bright:1001",
+          "state_key": [
+            "0126",
+            213,
+            0,
+            "bright:1001"
+          ],
+          "original_qualified_moving": true
+        }
+      ],
+      "physical_airborne_class_verified": false
+    },
+    {
+      "sample_index": 312,
+      "panel": "dense",
+      "clip_id": "0126",
+      "window_id": "126",
+      "frame_index": 214,
+      "source_xy": [
+        3142.48,
+        2709.06
+      ],
+      "position_uncertainty_px": 5,
+      "original_reference_match_gate_px": 7,
+      "polarity": "bright",
+      "saved_evidence_index": 152,
+      "original_candidate_identity": "candidate:36",
+      "original_strict_assigned_identity": "0/bright:1001",
+      "original_measured_alternatives": [
+        {
+          "identity": "0/bright:1001",
+          "state_key": [
+            "0126",
+            214,
+            0,
+            "bright:1001"
+          ],
+          "original_qualified_moving": true
+        }
+      ],
+      "physical_airborne_class_verified": false
+    },
+    {
+      "sample_index": 313,
+      "panel": "dense",
+      "clip_id": "0126",
+      "window_id": "126",
+      "frame_index": 215,
+      "source_xy": [
+        3147.16,
+        2705.95
+      ],
+      "position_uncertainty_px": 5,
+      "original_reference_match_gate_px": 7,
+      "polarity": "bright",
+      "saved_evidence_index": 153,
+      "original_candidate_identity": "candidate:53",
+      "original_strict_assigned_identity": "0/bright:1001",
+      "original_measured_alternatives": [
+        {
+          "identity": "0/bright:1001",
+          "state_key": [
+            "0126",
+            215,
+            0,
+            "bright:1001"
+          ],
+          "original_qualified_moving": true
+        }
+      ],
+      "physical_airborne_class_verified": false
+    },
+    {
+      "sample_index": 314,
+      "panel": "dense",
+      "clip_id": "0126",
+      "window_id": "126",
+      "frame_index": 216,
+      "source_xy": [
+        3152.44,
+        2701.83
+      ],
+      "position_uncertainty_px": 5,
+      "original_reference_match_gate_px": 7,
+      "polarity": "bright",
+      "saved_evidence_index": 154,
+      "original_candidate_identity": null,
+      "original_strict_assigned_identity": null,
+      "original_measured_alternatives": [],
+      "physical_airborne_class_verified": false
+    },
+    {
+      "sample_index": 315,
+      "panel": "dense",
+      "clip_id": "0126",
+      "window_id": "126",
+      "frame_index": 217,
+      "source_xy": [
+        3162.59,
+        2695.84
+      ],
+      "position_uncertainty_px": 5,
+      "original_reference_match_gate_px": 7,
+      "polarity": "bright",
+      "saved_evidence_index": 155,
+      "original_candidate_identity": "candidate:51",
+      "original_strict_assigned_identity": "0/bright:1001",
+      "original_measured_alternatives": [
+        {
+          "identity": "0/bright:1001",
+          "state_key": [
+            "0126",
+            217,
+            0,
+            "bright:1001"
+          ],
+          "original_qualified_moving": true
+        }
+      ],
+      "physical_airborne_class_verified": false
+    },
+    {
+      "sample_index": 316,
+      "panel": "dense",
+      "clip_id": "0126",
+      "window_id": "126",
+      "frame_index": 218,
+      "source_xy": [
+        3163.59,
+        2694.22
+      ],
+      "position_uncertainty_px": 5,
+      "original_reference_match_gate_px": 7,
+      "polarity": "bright",
+      "saved_evidence_index": 156,
+      "original_candidate_identity": "candidate:42",
+      "original_strict_assigned_identity": "0/bright:1001",
+      "original_measured_alternatives": [
+        {
+          "identity": "0/bright:1001",
+          "state_key": [
+            "0126",
+            218,
+            0,
+            "bright:1001"
+          ],
+          "original_qualified_moving": true
+        }
+      ],
+      "physical_airborne_class_verified": false
+    }
+  ],
+  "provisional_controls": [
+    {
+      "original_order_index": 0,
+      "clip": "0126",
+      "frames_inclusive": [
+        16,
+        28
+      ],
+      "crop_xywh": [
+        1807,
+        1616,
+        192,
+        192
+      ],
+      "label": "building_boundary_response",
+      "identity_fields": [
+        "clip",
+        "frames_inclusive",
+        "crop_xywh",
+        "label"
+      ],
+      "baseline_measured": 0,
+      "baseline_predicted": 0,
+      "v36_measured": 0,
+      "v36_predicted": 0,
+      "verified_airborne_negative": false,
+      "tile_capture_enabled": false,
+      "evaluation_source": "complete clean and probe frame journals; original full control scope predicates"
+    },
+    {
+      "original_order_index": 1,
+      "clip": "0126",
+      "frames_inclusive": [
+        258,
+        270
+      ],
+      "crop_xywh": [
+        3202,
+        1705,
+        192,
+        192
+      ],
+      "label": "building_boundary_response",
+      "identity_fields": [
+        "clip",
+        "frames_inclusive",
+        "crop_xywh",
+        "label"
+      ],
+      "baseline_measured": 0,
+      "baseline_predicted": 0,
+      "v36_measured": 0,
+      "v36_predicted": 0,
+      "verified_airborne_negative": false,
+      "tile_capture_enabled": false,
+      "evaluation_source": "complete clean and probe frame journals; original full control scope predicates"
+    },
+    {
+      "original_order_index": 2,
+      "clip": "0126",
+      "frames_inclusive": [
+        289,
+        301
+      ],
+      "crop_xywh": [
+        2674,
+        1671,
+        192,
+        192
+      ],
+      "label": "cloud_texture_response",
+      "identity_fields": [
+        "clip",
+        "frames_inclusive",
+        "crop_xywh",
+        "label"
+      ],
+      "baseline_measured": 10,
+      "baseline_predicted": 6,
+      "v36_measured": 3,
+      "v36_predicted": 0,
+      "verified_airborne_negative": false,
+      "tile_capture_enabled": false,
+      "evaluation_source": "complete clean and probe frame journals; original full control scope predicates"
+    },
+    {
+      "original_order_index": 3,
+      "clip": "0126",
+      "frames_inclusive": [
+        478,
+        490
+      ],
+      "crop_xywh": [
+        2527,
+        1715,
+        192,
+        192
+      ],
+      "label": "cloud_texture_response",
+      "identity_fields": [
+        "clip",
+        "frames_inclusive",
+        "crop_xywh",
+        "label"
+      ],
+      "baseline_measured": 23,
+      "baseline_predicted": 17,
+      "v36_measured": 3,
+      "v36_predicted": 0,
+      "verified_airborne_negative": false,
+      "tile_capture_enabled": false,
+      "evaluation_source": "complete clean and probe frame journals; original full control scope predicates"
+    },
+    {
+      "original_order_index": 4,
+      "clip": "0126",
+      "frames_inclusive": [
+        522,
+        534
+      ],
+      "crop_xywh": [
+        2757,
+        2032,
+        192,
+        192
+      ],
+      "label": "cloud_texture_response",
+      "identity_fields": [
+        "clip",
+        "frames_inclusive",
+        "crop_xywh",
+        "label"
+      ],
+      "baseline_measured": 8,
+      "baseline_predicted": 8,
+      "v36_measured": 2,
+      "v36_predicted": 0,
+      "verified_airborne_negative": false,
+      "tile_capture_enabled": false,
+      "evaluation_source": "complete clean and probe frame journals; original full control scope predicates"
+    },
+    {
+      "original_order_index": 5,
+      "clip": "0126",
+      "frames_inclusive": [
+        449,
+        461
+      ],
+      "crop_xywh": [
+        2369,
+        1670,
+        192,
+        192
+      ],
+      "label": "cloud_texture_response",
+      "identity_fields": [
+        "clip",
+        "frames_inclusive",
+        "crop_xywh",
+        "label"
+      ],
+      "baseline_measured": 3,
+      "baseline_predicted": 12,
+      "v36_measured": 0,
+      "v36_predicted": 0,
+      "verified_airborne_negative": false,
+      "tile_capture_enabled": false,
+      "evaluation_source": "complete clean and probe frame journals; original full control scope predicates"
+    },
+    {
+      "original_order_index": 6,
+      "clip": "0126",
+      "frames_inclusive": [
+        324,
+        336
+      ],
+      "crop_xywh": [
+        2251,
+        1670,
+        192,
+        192
+      ],
+      "label": "cloud_boundary_response",
+      "identity_fields": [
+        "clip",
+        "frames_inclusive",
+        "crop_xywh",
+        "label"
+      ],
+      "baseline_measured": 26,
+      "baseline_predicted": 21,
+      "v36_measured": 8,
+      "v36_predicted": 9,
+      "verified_airborne_negative": false,
+      "tile_capture_enabled": false,
+      "evaluation_source": "complete clean and probe frame journals; original full control scope predicates"
+    }
+  ],
+  "control_totals": {
+    "baseline_measured": 70,
+    "baseline_predicted": 64,
+    "v36_measured": 16,
+    "v36_predicted": 9
+  },
+  "provenance": {
+    "file_sha256": {
+      "results/tiny_target/accuracy_v55_20260926/trace_01/trace.json": "d74980ab3b5918a7385b989d993618a7e2a274b3e47fb4923505f774b0eefdf8",
+      "results/tiny_target/accuracy_v48_20260926/shadow_01/reference_evidence.json": "380a023dc5f17139b747dcb6f5bd80859c2fe4bb572dcafedde1ffd87c66e532",
+      "results/tiny_target/accuracy_v36_20260924/full_context_01/summary.json": "1c508612cc45d1ab43a9c9eb0091b3f5814fd9f61c83f57ecdd45b8546eb883c",
+      "results/tiny_target/visible_validation_v34_20260923/audit_20260924/evidence/run/full_repeat0_0126/launch.json": "653c760112f01ebc074e23258104b5a3976aec8114abb26865cf211009c6fe5b",
+      "results/tiny_target/visible_validation_v34_20260923/audit_20260924/evidence/run/full_repeat0_0126.v29.json": "852a2e93428166c8944b16a3fe34e9f51112d46f929a3182857fa1a14e9de68e",
+      "scripts/run_visible_combined_v29.py": "1923e4105477d1f9b21593c0a56897a5b2f200a2ac0bf9006703452ff43dba50",
+      "scripts/combined_v29_protocol.py": "a7457f759b6e67959ca165a328331b440d7e164aee51ebe1bfd1c1a934d20ebe",
+      "scripts/combined_v29_state.py": "728bf8f6b0b958b6cd56eeda62425b921d1abb7130a9832ce5048124ab4471d5"
+    },
+    "frozen_configuration_sha256": "7c473765048e8e7f8c87042a421e0b22daf6280bb4591fd50f1d438ba2597d2f",
+    "frozen_motion_configuration_sha256": "fe450546af91f01a0fb090d76df3ba4db24081b0077c6a220d5194990fdda5b1",
+    "frozen_libraries_sha256": {
+      "cuda_front": "fd689b653175eb9baf3e84259ccccd431ba3ec8aa6c6fa4378a596eb03f8a027",
+      "native_shape": "ec3ef02040df013536a5610d78bcde9763c1bcade0ec8a43e6525a6b3f0bb7ca",
+      "geometry": "1d81a0369a78ca462fce16e9655e9c81811d4544e071c013682f5aaf58821782",
+      "tracking_batch": "bdabc75a633da7cb72c0565a3d2b87dcb6662b17b12ba96ccd7a7c586bebb644"
+    },
+    "frozen_tracking_transformed_sha256": "571641e429f6604123ab98eba974d4e9623abcad2402be147913b7622d860325",
+    "freeze_all_new_sources_tests_manifest_plan_before_real_run": true,
+    "hash_verify_media_before_decode": true,
+    "hash_verify_sources_and_artifacts_after_run": true,
+    "fresh_exclusive_output_directory_required": true,
+    "paths_inside_receipts_are_not_an_access_allowlist": true
+  },
+  "reporting_limits": {
+    "previously_exposed_diagnostic_selection": true,
+    "blind_evaluation": false,
+    "detector_settings_tuned": false,
+    "production_promotion": false,
+    "new_accuracy_claim": false,
+    "reference_features_establish_airborne_class": false,
+    "controls_are_authoritative_negatives": false,
+    "missing_values_become_zero": false,
+    "missing_assignment_filled_from_neighbor": false,
+    "source_model_unknown_means_production_miss": false,
+    "real_cause_only_after_native_capture_and_equivalence_pass": true,
+    "raw16_access_allowed": false,
+    "sealed_holdout_access_allowed": false,
+    "efficiency_work_paused": true
+  }
+}

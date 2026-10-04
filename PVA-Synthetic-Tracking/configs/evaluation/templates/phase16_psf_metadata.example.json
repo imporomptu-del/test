@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "calibration_id": "replace-with-calibration-id",
+  "source": "measured_camera_point_sources",
+  "kernel_sha256": "replace-with-lowercase-sha256-of-npy",
+  "operating_condition_id": "replace-with-shared-condition-id",
+  "capture_method": "Describe point-source capture, rejection, registration, and robust combination.",
+  "reviewer": "replace-with-reviewer",
+  "reviewed_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "camera": {
+    "model": "SkyEye62AM",
+    "camera_id": "replace-with-camera-id"
+  },
+  "conditions": {
+    "focus_setting": "replace-with-focus-setting",
+    "aperture": "replace-with-aperture-or-fixed",
+    "wavelength_band": "replace-with-band",
+    "exposure_us": 0,
+    "gain": 0,
+    "sensor_temperature_c": 0,
+    "field_region": "replace-with-field-region"
+  }
+}

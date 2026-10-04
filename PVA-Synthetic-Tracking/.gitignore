@@ -1,0 +1,43 @@
+# Local Python environments, caches, and OS metadata
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+._*
+.idea/
+.vscode/
+
+# Generated output, camera data, and local configuration
+/results/
+/data/
+/artifacts/
+/outputs/
+/configs/*.local.yaml
+/configs/*.local.json
+*.log
+*.raw
+*.npy
+*.npz
+*.avi
+*.mp4
+*.mkv
+*.tar
+*.tar.gz
+*.zip
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Rebuild native libraries on the target machine
+/build/
+/dist/
+*.o
+*.so
+*.dylib

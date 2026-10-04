@@ -1,0 +1,242 @@
+"""Read-only audit of completed trials in the completed v33 clock diagnostic."""
+import argparse
+from collections import defaultdict
+import datetime
+import math
+from pathlib import Path
+
+from profile_visible_interaction_v30 import read, sha, write
+from analyze_visible_interaction_v30 import require, statistics
+from verify_visible_combined_v29 import verify_sources, transformed_hash, ROOT
+from verify_visible_interaction_v30 import V29_LOCAL, audit_relocated_trial
+
+V31_LOCAL = ROOT/'results/tiny_target/visible_threads_v31_20260920/evidence'
+REMOTE = Path('/tmp/seaqr_visible_clocks_v33_hEJpmY')
+OLD_RUNNER = Path('/tmp/seaqr_visible_threads_v31_QvwNyq/run_visible_threads_v31.py')
+MODES = ('v26_default', 'combined_default', 'v26', 'combined')
+
+
+def verify_stability(receipt, saved, fixed, thermal):
+    target = {n: dict(p, minimum=p['maximum'] if fixed else p['minimum']) for n,p in saved.items()}
+    expected_paths = {n: f'/sys/devices/system/cpu/cpufreq/policy{n[3:]}/scaling_min_freq'
+        for n in ('cpu0','cpu4','cpu8')}
+    expected_paths['gpu'] = '/sys/class/devfreq/17000000.gpu/min_freq'
+    writes = receipt['writes']
+    require(len(writes)==4 and {w['policy'] for w in writes}==set(saved), 'Incomplete floor writes')
+    for w in writes:
+        require(w['written'] is True and 'error' not in w and w['path']==expected_paths[w['policy']]
+            and w['value']==target[w['policy']]['minimum'], 'Wrong floor request')
+    v=receipt['verification']; obs=v['observations']
+    require(v['verified'] and v['error'] is None and v['target']==target, 'Verification failed')
+    require(v['timeout_s']==3 and v['poll_interval_s']==.05 and v['required_stable_samples']==3,
+        'Changed convergence settings')
+    require(len(obs)>=3 and 0 <= v['elapsed_s'] <= 3, 'Invalid convergence duration')
+    stable=0; previous=-1.0
+    for i,o in enumerate(obs):
+        elapsed=o['elapsed_s']
+        require(math.isfinite(elapsed) and 0<=elapsed<=v['elapsed_s'] and
+            (i==0 or elapsed-previous>=.05-1e-6), 'Unspaced/reordered policy observations')
+        previous=elapsed
+        actual=o['actual']
+        if actual is not None:
+            require(set(actual)==set(saved) and all(actual[n][k]==saved[n][k]
+                for n in saved for k in ('maximum','governor')), 'Changed maximum/governor')
+            require(o['read_error'] is None, 'Contradictory observation')
+        else:
+            require(bool(o['read_error']), 'Unexplained missing observation')
+        stable = stable+1 if actual==target else 0
+        require(o['consecutive_matches']==stable, 'Incorrect stability counter')
+        if thermal:
+            temps=o['safety']['temperatures']
+            require(all(type(temps.get(n)) is int and 0<temps[n]<75000 for n in ('cpu-thermal','tj-thermal')),
+                'Missing/unsafe transition temperature')
+            require(all(0<x<75000 for x in temps.values() if type(x)is int), 'Unsafe optional sensor')
+    require(stable>=3 and obs[-1]['elapsed_s']==v['elapsed_s'], 'Insufficient final stability')
+    return dict(observations=len(obs), nonmatching=sum(o['actual']!=target for o in obs), elapsed_s=v['elapsed_s'])
+
+
+def verify_transitions(evidence, batch, saved):
+    d=evidence/'run'; pre=read(d/'transition_preflight.json')
+    require(sha(d/'transition_preflight.json')==batch['transition_preflight_sha256'], 'Changed transition preflight')
+    require(pre['passed'] and pre['error'] is None and not pre['media_accessed'] and 0<=pre['elapsed_s']<=30,
+        'Failed hardware preflight')
+    expected = [(f'preflight_{i}_{mode}', mode=='fixed') for i in range(3) for mode in ('fixed','auto')]
+    require(len(pre['transitions'])==6 and len(batch['transitions'])==50, 'Incomplete clock transition scope')
+    expected += [(s['name'],s['fixed']) for s in specs()]
+    result=[]
+    for (label,fixed), row in zip(expected,pre['transitions']+batch['transitions']):
+        p=d/'transitions'/(label+'.json'); r=read(p)
+        require(row['label']==r['label']==label and row['fixed']==r['fixed']==fixed
+            and row['sha256']==sha(p) and r['verified'] and r['error'] is None, 'Changed/failed transition')
+        require(all(r['before'][n][k]==saved[n][k] for n in saved for k in ('maximum','governor')),
+            'Initial policy bounds changed')
+        require(row['elapsed_s']==r['elapsed_s'] and r['elapsed_s']>=r['verification']['elapsed_s'],
+            'Transition duration changed')
+        result.append(dict(label=label, fixed=fixed, **verify_stability(r,saved,fixed,True)))
+    restorations={}
+    for who in ('controller','watchdog'):
+        r=read(d/(who+'_restoration.json'))
+        require(r['restored'] and not r['errors'] and r['actual']==r['saved']==saved, 'Restoration failed')
+        restorations[who]=verify_stability(r,saved,False,False)
+    return dict(verified=True, preflight_passed=True, transitions=result, restorations=restorations)
+
+
+def specs():
+    result = [dict(name='smoke_'+c, clip=c, mode='combined', fixed=True, audit=True) for c in ('0126', '0082')]
+    orders = (MODES, ('combined', 'v26', 'combined_default', 'v26_default'),
+              ('combined_default', 'v26', 'combined', 'v26_default'))
+    for repeat, order in enumerate(orders):
+        for clip in (('0082', '0126') if repeat == 1 else ('0126', '0082')):
+            clock_order = (False, True) if (repeat + (clip == '0082')) % 2 == 0 else (True, False)
+            for fixed in clock_order:
+                for mode in order:
+                    result.append(dict(name=f'{clip}_repeat{repeat}_{"fixed" if fixed else "auto"}_{mode}',
+                        clip=clip, mode=mode, fixed=fixed, audit=False))
+    return result
+
+
+def summarize(trials, samples):
+    result = {}
+    for clip in ('0126', '0082'):
+        present = {(fixed, mode): [i for i in range(3)
+            if f'{clip}_repeat{i}_{"fixed" if fixed else "auto"}_{mode}' in trials]
+            for fixed in (False, True) for mode in MODES}
+        paired = sorted(set.intersection(*(set(v) for v in present.values())))
+        require(paired, 'No complete matched repeat for '+clip)
+        cells = {}
+        for fixed in (False, True):
+            clock = 'fixed' if fixed else 'auto'
+            cells[clock] = {}
+            for mode in MODES:
+                names = [f'{clip}_repeat{i}_{clock}_{mode}' for i in paired]
+                rows = [trials[n] for n in names]
+                pooled = sum(r['count'] for r in rows)/sum(r['wall_s'] for r in rows)
+                cells[clock][mode] = dict(pooled_fps=pooled, individual_fps=[r['fps'] for r in rows],
+                    matched_repeats=paired, all_available_repeats=present[(fixed, mode)],
+                    stage_statistics={k: statistics([x for n in names for x in samples[n][k]]) for k in samples[names[0]]})
+        gain = {mode: dict(pooled=cells['fixed'][mode]['pooled_fps']/cells['auto'][mode]['pooled_fps'],
+            paired=[a/b for a,b in zip(cells['fixed'][mode]['individual_fps'], cells['auto'][mode]['individual_fps'])]) for mode in MODES}
+        thread = {clock: {arm: cells[clock][arm]['pooled_fps']/cells[clock][arm+'_default']['pooled_fps']
+            for arm in ('v26', 'combined')} for clock in ('auto', 'fixed')}
+        integration = {clock: {setting: cells[clock]['combined'+setting]['pooled_fps']/cells[clock]['v26'+setting]['pooled_fps']
+            for setting in ('', '_default')} for clock in ('auto', 'fixed')}
+        result[clip] = dict(matched_repeats=paired, cells=cells, clock_speedups=gain,
+            one_thread_vs_inherited=thread, combined_vs_gpu=integration)
+    return result
+
+
+def telemetry(rows, trials, execution):
+    require(rows and all(a['monotonic_ns'] < b['monotonic_ns'] for a,b in zip(rows, rows[1:])), 'Telemetry sequence invalid')
+    require(all(r['trial'] in trials and r['phase'] in ('settle', 'video') for r in rows), 'Telemetry outside completed scope')
+    peak = max(v for r in rows for v in r['temperatures'].values() if type(v) is int)
+    require(peak < 75000, 'Thermal cutoff violated in recorded samples')
+    results = {}
+    for n in trials:
+        frames = execution[n]['frames']
+        begin, end = frames[32]['cpu_prepare_start_ns'], frames[-1]['consumer_complete_ns']
+        subset = [r for r in rows if r['trial'] == n and r['phase'] == 'video' and begin <= r['monotonic_ns'] <= end]
+        require(len(subset) >= 2, 'Missing steady processing telemetry '+n)
+        clocks = {}
+        for name in ('cpu0', 'cpu4', 'cpu8', 'gpu'):
+            values = [r['clocks'][name] for r in subset if type(r['clocks'].get(name)) is int]
+            require(values, 'No readable steady frequency '+n+' '+name)
+            clocks[name] = statistics(values)
+            target = 1300500000 if name == 'gpu' else 2201600
+            clocks[name]['samples_at_fixed_target'] = sum(x == target for x in values)
+        results[n] = dict(samples=len(subset), frames='32 through 127', clocks=clocks,
+            maximum_temperature_c=max(v for r in subset for v in r['temperatures'].values() if type(v) is int)/1000)
+    return dict(recorded_samples=len(rows), maximum_temperature_c=peak/1000, trials=results,
+        caveat='500 ms snapshots, not execution-weighted counters or proof against every transient throttle. CPU policy frequencies are not consumer-affinity measurements.')
+
+
+def verify(evidence):
+    from export_visible_clocks_v33 import files_for
+    manifest = read(evidence/'export_manifest_v33_01.json')
+    require(manifest['post_run'] and not manifest['media_included'], 'Invalid export')
+    require(set(manifest['files']) == set(files_for(specs())), 'Incomplete exported evidence')
+    for n, digest in manifest['files'].items():
+        require(sha(evidence/n) == digest, 'Changed export '+n)
+    require(sha(evidence/'export_visible_clocks_v33.py') == sha(ROOT/'scripts/export_visible_clocks_v33.py'),
+        'Changed exporter')
+    f = read(evidence/'freeze.json'); run = evidence/'run'
+    batch, status = read(run/'batch.json'), read(run/'status.json')
+    schedule = specs()
+    require(f['pre_run'] and f['schedule'] == batch['schedule'] == schedule, 'Changed planned schedule')
+    require(not f['settings_changed'] and not f['media_accessed'], 'Preparation scope changed')
+    require(f['v31_freeze_sha256'] == sha(V31_LOCAL/'freeze.json') and f['v31_batch_sha256'] == sha(V31_LOCAL/'batch.json'), 'Changed v31 dependency')
+    expected_sources = {'visible_clocks_v33.py', 'test_visible_clocks_v33.py', 'visible_clocks_v33_plan.md', 'start_visible_clocks_v33_tmux.sh'}
+    require(set(f['sources']) == expected_sources, 'Source freeze incomplete')
+    for name, digest in f['sources'].items():
+        sub = 'tests/unit' if name.startswith('test_') else 'docs' if name.endswith('.md') else 'scripts'
+        require(digest == sha(evidence/name) == sha(ROOT/sub/name), 'Changed frozen source '+name)
+    require(f['unit_log_sha256'] == sha(evidence/'unit.log') and '\nOK\n' in (evidence/'unit.log').read_text(), 'Unit gate failed')
+    require(f['dependency_preflight_sha256'] == sha(evidence/'dependency_preflight.json') and not read(evidence/'dependency_preflight.json')['returncode'], 'Dependency preflight failed')
+    identity = read(run/'run_identity.json')
+    require(identity['freeze_sha256'] == sha(evidence/'freeze.json') and identity['child_uid'] == 1000 and identity['uid'] == 0, 'Controller/child provenance changed')
+    require(not status['running'] and batch['completed'] and len(batch['rows']) == status['completed'] == 50, 'Unexpected run state')
+    require(batch['error'] is None and status['error'] is None, 'Different failure needs investigation')
+    require(batch['settings_restored'] and status['settings_restored'] and batch['diagnostic_only']
+        and not any(batch[k] for k in ('raw16_accessed', 'defaults_changed', 'full_regression_run')), 'Scope/restoration flag changed')
+    original = read(run/'original_policy.json')
+    controller, watchdog = read(run/'controller_restoration.json'), read(run/'watchdog_restoration.json')
+    require(original == f['policy'] == controller['saved'] == watchdog['saved'], 'Saved policies differ')
+    require(controller['restored'] and controller['actual'] == original and not controller['errors'], 'Controller restoration not verified')
+    require(watchdog['restored'] and not watchdog['errors'] and watchdog['actual'] == original
+        and watchdog['reason'] == 'normal_exit', 'Final watchdog restoration not verified')
+    transition_audit = verify_transitions(evidence, batch, original)
+    frozen, generated, geometry = verify_sources(V29_LOCAL)
+    tracking_hash = transformed_hash()
+    reference = read(V31_LOCAL/'smoke_0126.v31.json')['runtime_before']
+    def runtime(info, one):
+        expected_env = dict.fromkeys(('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','GOTO_NUM_THREADS'))
+        if one:
+            expected_env['OPENBLAS_NUM_THREADS'] = '1'
+        require(info['blas'] == [dict(reference['blas'][0], threads=1 if one else 12)]
+            and info['thread_environment'] == expected_env and info['affinity'] == reference['affinity']
+            and info['numpy'] == reference['numpy'] and info['opencv'] == reference['opencv'], 'Runtime/library/thread identity changed')
+    trials, samples, execution = {}, {}, {}
+    for spec, row in zip(schedule, batch['rows']):
+        n, mode = spec['name'], spec['mode']
+        require(all(row[k] == v for k,v in spec.items()) and row['returncode'] == 0, 'Order/scope/return code changed')
+        r = read(run/(n+'.v31.json'))
+        require(r['passed'] and r['error'] is None and r['frames'] == r['count'] == 128
+            and r['clip'] == spec['clip'] and r['mode'] == mode and r['audit'] == spec['audit'] and not r['traced'], 'Invalid child receipt')
+        require(r['arm'] == mode.removesuffix('_default') and r['thread_policy'] == ('inherited' if mode.endswith('_default') else 'one'), 'Wrong child mode')
+        require(not any(r[k] for k in ('raw16_accessed','defaults_changed','algorithm_changed')), 'Changed child scope')
+        require(r['freeze_sha256'] == sha(V31_LOCAL/'freeze.json') and row['v31_sha256'] == sha(run/(n+'.v31.json'))
+            and row['receipt_sha256'] == r['receipt_sha256'] == sha(run/(n+'.v29.json'))
+            and row['log_sha256'] == sha(run/(n+'.log')), 'Changed child/source/timing provenance')
+        cmd = ['/usr/bin/python3', str(OLD_RUNNER), '--clip', spec['clip'], '--mode', mode,
+            '--output', str(REMOTE/'run'/n), '--frames', '128'] + (['--audit'] if spec['audit'] else [])
+        require(row['command'] == cmd, 'Command changed')
+        for info in (r['runtime_before'], r['runtime_after']):
+            runtime(info, not mode.endswith('_default'))
+        require(r['runtime_after']['opencv_threads'] == 2, 'OpenCV policy changed')
+        trial_spec = dict(name=n, clip=spec['clip'], arm=r['arm'], frames=128, state_audit=spec['audit'])
+        trial, values = audit_relocated_trial(run, trial_spec, row, frozen, generated, geometry, tracking_hash)
+        require(trial['count'] == r['count'] and trial['fps'] == r['fps'] and trial['wall_s'] == r['wall_s'], 'Timing mismatch')
+        trial.update(mode=mode, fixed=spec['fixed'])
+        trials[n], samples[n] = trial, values
+        execution[n] = read(run/(n+'.v29.json'))['execution']
+        print('Verified '+n, flush=True)
+    rows = [__import__('json').loads(line) for line in (run/'telemetry.jsonl').read_text().splitlines()]
+    timing_trials = {n:r for n,r in trials.items() if not r['state_audit']}
+    missing = schedule[len(batch['rows']):]
+    require(not missing, 'Incomplete schedule')
+    return dict(verified_completed_trials=True, experiment_completed=True, partial=False, trials=trials,
+        completed_trials=len(trials), scheduled_trials=50, missing=missing, transition_audit=transition_audit, matched_comparisons=summarize(timing_trials, samples),
+        telemetry=telemetry(rows, trials, execution), frame_instances=sum(r['count'] for r in trials.values()),
+        unique_development_frames=256, controller_restoration=controller, watchdog_restoration=watchdog,
+        original_recorded_settings_restored=batch['settings_restored'], current_settings_require_separate_readback=True,
+        start_utc=identity['started_utc'], end_utc=datetime.datetime.fromtimestamp(batch['finished_ns']/1e9, datetime.timezone.utc).isoformat(),
+        error=batch['error'], raw16_accessed=False, full_regression_run=False, defaults_changed=False, production_approved=False,
+        verifier_sha256=sha(__file__), freeze_sha256=sha(evidence/'freeze.json'), batch_sha256=sha(run/'batch.json'),
+        caveat='Complete short-prefix file-replay diagnostic: three matched repeats on both scenes. Not a full-video regression, holdout accuracy evaluation, or live camera latency.')
+
+
+if __name__ == '__main__':
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--evidence', required=True, type=Path)
+    p.add_argument('--output', required=True, type=Path)
+    args = p.parse_args()
+    write(args.output, verify(args.evidence))

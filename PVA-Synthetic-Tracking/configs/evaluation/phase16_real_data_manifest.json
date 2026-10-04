@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "manifest_id": "seaqr.phase16.real-data.v1",
+  "psf_calibrations": [
+    {
+      "calibration_id": "skyeye62am_operational_psf",
+      "availability": "missing",
+      "kernel_path": null,
+      "metadata_path": null,
+      "operating_condition_id": "skyeye62am_operational_condition_unassigned",
+      "notes": "The Jetson and repository audit found no measured camera PSF array or calibration metadata. The provisional Gaussian kernel is intentionally ineligible here."
+    }
+  ],
+  "cohorts": [
+    {
+      "cohort_id": "labeled_real_point_targets",
+      "purpose": "real_target_sensitivity",
+      "availability": "missing",
+      "source_path": null,
+      "source_sha256": null,
+      "timestamps_path": null,
+      "timestamps_sha256": null,
+      "evidence_path": null,
+      "psf_calibration_id": "skyeye62am_operational_psf",
+      "operating_condition_id": "skyeye62am_operational_condition_unassigned",
+      "notes": "No authoritative point-target annotations were found in the AVI or RAW16 collections."
+    },
+    {
+      "cohort_id": "verified_empty_camera_sequence",
+      "purpose": "verified_empty_false_alarm",
+      "availability": "missing",
+      "source_path": null,
+      "source_sha256": null,
+      "timestamps_path": null,
+      "timestamps_sha256": null,
+      "evidence_path": null,
+      "psf_calibration_id": "skyeye62am_operational_psf",
+      "operating_condition_id": "skyeye62am_operational_condition_unassigned",
+      "notes": "Existing sky recordings are unlabeled and cannot be promoted to empty controls without authoritative review."
+    }
+  ]
+}

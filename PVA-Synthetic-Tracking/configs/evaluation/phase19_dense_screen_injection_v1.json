@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "random_seed": 75,
+  "psf_sigma_px": 0.8,
+  "psf_radius_px": 3,
+  "targets": [
+    {
+      "target_id": "dense_flux_500",
+      "flux_dn": 500.0,
+      "reference_timestamp_ns": 0,
+      "reference_position_xy_px": [1200.25, 700.25],
+      "velocity_xy_px_s": [0.5, 0.25],
+      "acceleration_xy_px_s2": [0.0, 0.0],
+      "first_frame_index": 12,
+      "last_frame_index": null
+    },
+    {
+      "target_id": "dense_flux_1000",
+      "flux_dn": 1000.0,
+      "reference_timestamp_ns": 0,
+      "reference_position_xy_px": [1600.75, 700.25],
+      "velocity_xy_px_s": [-1.0, 0.5],
+      "acceleration_xy_px_s2": [0.0, 0.0],
+      "first_frame_index": 12,
+      "last_frame_index": null
+    },
+    {
+      "target_id": "dense_flux_2000",
+      "flux_dn": 2000.0,
+      "reference_timestamp_ns": 0,
+      "reference_position_xy_px": [2600.25, 500.75],
+      "velocity_xy_px_s": [1.5, -0.5],
+      "acceleration_xy_px_s2": [0.0, 0.0],
+      "first_frame_index": 12,
+      "last_frame_index": null
+    },
+    {
+      "target_id": "dense_flux_4000",
+      "flux_dn": 4000.0,
+      "reference_timestamp_ns": 0,
+      "reference_position_xy_px": [3400.75, 700.75],
+      "velocity_xy_px_s": [-2.0, 1.0],
+      "acceleration_xy_px_s2": [0.0, 0.0],
+      "first_frame_index": 12,
+      "last_frame_index": null
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "seaqr.feature-supply.plan.v1",
+  "date": "2026-09-29",
+  "purpose": "Bounded feature-supply experiment after human-reviewed discovery; not production promotion or independent accuracy evaluation.",
+  "allowed_clip_ids": ["0170", "0240"],
+  "native_input": {"width": 4784, "height": 3190, "bit_depth": 8, "frames_per_clip": 673, "nominal_fps": 10, "crop": null, "frame_stride": 1},
+  "candidate": {"harris_gain": 16, "harris_capacity_policy": "complete_grid", "feature_image_scale": 0.5},
+  "unchanged": ["PVA LK input", "minimum 30 accepted features", "inlier, residual and spatial coverage gates", "global fit model", "detector thresholds", "tracker thresholds", "reset/warmup policy", "native coverage", "clock policy"],
+  "forbidden": ["RAW16", "sealed holdout media", "threshold sweeps", "zero-motion fallback", "blanket post-reset detection suppression", "production promotion", "changes to original reports or labels", "sudo or clock writes"],
+  "preflight": {
+    "per_clip": true,
+    "generated_controls": ["low_contrast_static", "low_contrast_translated", "flat_static"],
+    "seed": 20260927,
+    "nonflat": {"dimensions_wh": [640, 512], "intensity_range": [120, 135], "translation_xy": [4, -2], "original_global_gates_must_pass": true, "interior_margin_px": 128, "minimum_interior_points": 30, "maximum_vector_error_px": 0.1, "maximum_median_point_error_px": 0.1, "maximum_point_error_px": 0.5},
+    "flat": "Must remain unavailable with zero Harris features, without runtime failure.",
+    "conversion": "All 256 U8 intensities must map exactly to S16 value multiplied by 16, range 0 through 4080."
+  },
+  "execution": {"workers": 1, "phase_deadline_seconds": 900, "batch_deadline_seconds": 3600, "start_below_celsius": 65, "stop_at_celsius": 75, "automatic_retries": 0, "scope": "Both full clips, only after both preflights pass."},
+  "comparison": {
+    "readiness_target_fraction_each_clip": 0.95,
+    "pva_runtime_errors_allowed": 0,
+    "positive_clip": "0240",
+    "positive_frames_inclusive": [430, 464],
+    "reference_sha256": "10d7ec68ba04b05784d4e19a56b0a6dbb561a9e44c7517513b7c1a3be5c881c3",
+    "reference_kind": "35 frozen baseline-derived actual measurement coordinates; not independent ground truth or recall.",
+    "retention": "Every reference frame must be detection-ready with a qualified actual dark measurement within 8 native pixels, belonging to one coherent candidate segment/polarity/track identity. Predictions do not count. Candidate ID need not equal baseline ID.",
+    "burst_frames_inclusive": [50, 105],
+    "burst_interpretation": "Unknown mixture includes a compact moving feature; state counts are review workload, not false positives.",
+    "runtime": "Current-clock cross-run diagnostic only, not controlled speed benchmark. More readiness creates more downstream work."
+  },
+  "preflight_revision": {"prior_workspace": "/tmp/seaqr_feature_supply_20260929_KKeIXV", "prior_freeze_sha256": "c7960eed22d34622a6bdea49dcbd80803788af91326796adff176097070f26f7", "failure": "Generated 640x480 image yielded a 40x30 smallest pyramid level, violating PVA minimum 32x32; no real video inference ran.", "change": "Generated image height512 gives minimum level40x32. Candidate settings, real-video dimensions and quality gates unchanged."},
+  "postcheck_revision": {"prior_workspace": "/tmp/seaqr_feature_supply_20260929_C44jII", "prior_freeze_sha256": "a25ea45f44afe2b40e313dedfd334a175f21604df78ab83219c05f95c781c057", "failure": "0170 completed all673frames; postcheck compared in-memory dataclass tuples against preflight JSON lists and falsely rejected identical serialized configuration. Failed receipt and complete journal preserved; 0240 did not run.", "change": "Compare canonical JSON for source-transform and effective configuration, still fail closed on any changed values. Repeat both clips in a fresh workspace with unchanged feature algorithm and all gates; disclose prior attempt, no selection of better outcome."},
+  "promotion_allowed": false,
+  "remaining_before_promotion": ["Earlier four-clip reference regression validation", "Independent source labels and label-specific clutter assessment", "Controlled runtime comparison"]
+}

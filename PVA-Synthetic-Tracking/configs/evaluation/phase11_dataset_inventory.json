@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "manifest_id": "seaqr.phase11.datasets.v1",
+  "entries": [
+    {
+      "dataset_id": "controlled_gaussian_noise_v1",
+      "category": "noise_only",
+      "availability": "available",
+      "label_status": "verified_empty",
+      "source_path": "generated/controlled_gaussian_noise_v1",
+      "scene_tags": ["synthetic", "gaussian_noise", "background_only"],
+      "notes": "Generated deterministically by the Phase 11 benchmark; valid for algorithm checks, not camera false-alarm claims."
+    },
+    {
+      "dataset_id": "raw16_chunk_0001_unlabeled",
+      "category": "noise_only",
+      "availability": "available_on_jetson",
+      "label_status": "unlabeled",
+      "source_path": "/home/serg/project/camera_reader_sky/srcsky/chunks_raw16_test/chunk_0001.mkv",
+      "scene_tags": ["raw16", "real_background", "unverified_empty"],
+      "notes": "Useful for unmatched-candidate burden only. It is not verified target-free, so unmatched candidates cannot be labeled false alarms."
+    },
+    {
+      "dataset_id": "real_target_labels",
+      "category": "real_targets",
+      "availability": "missing",
+      "label_status": "unavailable",
+      "source_path": null,
+      "scene_tags": ["required_collection"],
+      "notes": "No authoritative real-target labels are currently available."
+    },
+    {
+      "dataset_id": "raw16_chunk_0001_injected_v1",
+      "category": "raw_injected",
+      "availability": "available_on_jetson",
+      "label_status": "synthetic_ground_truth",
+      "source_path": "/home/serg/project/camera_reader_sky/srcsky/chunks_raw16_test/chunk_0001.mkv",
+      "scene_tags": ["raw16", "early_psf_injection", "real_background"],
+      "notes": "Synthetic labels are valid for injected targets; underlying real objects remain unlabeled and unmatched candidates are not automatically false alarms."
+    },
+    {
+      "dataset_id": "stress_scene_collection",
+      "category": "stress_scene",
+      "availability": "missing",
+      "label_status": "unavailable",
+      "source_path": null,
+      "scene_tags": ["waves", "glint", "clouds", "parallax", "vibration", "blur", "exposure_change", "compression", "hot_pixels"],
+      "notes": "A versioned, labeled stress collection still needs to be recorded."
+    },
+    {
+      "dataset_id": "controlled_geometry_v1",
+      "category": "controlled_geometry",
+      "availability": "available",
+      "label_status": "synthetic_ground_truth",
+      "source_path": "generated/controlled_geometry_v1",
+      "scene_tags": ["translation", "crossing_tracks", "irregular_timestamps"],
+      "notes": "Deterministic geometry fixtures used by stabilization, synthetic tracking, candidate, and Kalman tests."
+    }
+  ]
+}

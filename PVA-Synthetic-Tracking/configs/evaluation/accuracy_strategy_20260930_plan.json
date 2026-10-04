@@ -1,0 +1,55 @@
+{
+  "schema": "seaqr.accuracy-strategy.plan.v1",
+  "objective": "Reliable full-native U8 airborne-object detection and tracking with bounded nuisance workload and measured runtime; quality before promotion and speed claims.",
+  "protected_working_baseline": {
+    "identity": "v29 pipeline with v34 full-clip validation",
+    "reference_scorer": "scripts/score_feature_selection_references.py",
+    "reference_scorer_sha256": "b8698675b8296c66a4923e625219a035a5c3082a0b9b711543830a7072febd20",
+    "rule": "The later feature-selection experiment is diagnostic and has not passed its readiness gate; it does not replace this working baseline."
+  },
+  "frozen_diagnostic_candidate": {
+    "workspace": "/tmp/seaqr_feature_selection_20260929_q4iI5B",
+    "freeze_sha256": "9ae62028ca25fe063241e62697cb3578a708078a1b03969061b4736f0c9c6b7e",
+    "runner_sha256": "db5a92d69fb7fc503a3ef2d56236460d1bb32656111ad3fd170203b9ab53bc4d",
+    "diagnostic_analysis_sha256": "ce1370499b8a2ca34352bd1e4cc9bb4af31f5464959c8e24b630422a0030b1b1",
+    "known_target_guard": {"clip": "0240", "frames_inclusive": [430, 464], "actual_qualified_coherent_matches": 35, "ambiguity": 0, "radius_native_px": 8, "independent_ground_truth": false}
+  },
+  "stages": [
+    {"id": "protect_baseline", "required": "Hash-bound immutable outputs and known positive/reference guards; no baseline overwrite."},
+    {"id": "motion_robustness", "required": "Fixed generated geometry/photometry controls before real-pair independent native alignment; derive a bounded correction only if supported. Keep global-motion quality gates fixed."},
+    {"id": "nuisance_accuracy", "required": "Audit actual candidate/track workload and reviewed nuisance labels. Test one generic algorithm change at a time; do not hide overlays or treat unlabeled workload as false positives."},
+    {"id": "frozen_validation", "required": "Preserve known targets and temporal coverage, count abstentions/misses and nuisance labels separately, then evaluate frozen candidate against separately reserved permitted data. Sealed holdouts remain closed."},
+    {"id": "efficiency", "required": "Profile only a quality-qualified candidate. Prefer exact execution changes and require non-timing parity where semantics must remain unchanged. Measure end-to-end latency, native frame throughput, memory and temperatures."}
+  ],
+  "independent_patch_measurement": {
+    "algorithm": "Float64 zero-mean normalized cross-correlation on native U8 bilinear samples; no global refit or PVA-seeded initialization.",
+    "template_side": 31,
+    "search_center": "previous native point only",
+    "search_radius_px": 3,
+    "grid_step_px": 0.25,
+    "candidate_count": 625,
+    "maximum_candidate_batch": 64,
+    "minimum_patch_std_dn": 1,
+    "minimum_ncc": 0.8,
+    "minimum_competing_peak_gap": 0.02,
+    "competing_peak_exclusion_chebyshev_px": 0.75,
+    "minimum_negative_ncc_hessian_eigenvalue": 0.001,
+    "maximum_negative_ncc_hessian_condition": 100,
+    "require_interior_peak": true,
+    "require_complete_template_and_search_support": true,
+    "failed_observability_output": "null displacement; diagnostic argmax explicitly untrusted",
+    "uncertainty_is_calibrated": false,
+    "known_observable_control_max_error_px": 0.25,
+    "positive_control_families": ["analytic texture", "analytic corner"],
+    "controls_per_positive_family": 8,
+    "abstention_controls": ["flat", "straight edge", "periodic ambiguity", "out-of-range displacement"],
+    "default_generated_image_size_wh": [640, 512],
+    "photometric_pairs": [{"gain": 0.8, "offset": 12}, {"gain": 1.2, "offset": -12}],
+    "control_retuning_after_real_pixels": false,
+    "real_pair_ends": {"0170": [451, 452, 453], "0240": [343, 344, 345]},
+    "real_sources": "Only existing hash-bound U8 sources from the previous passive trace, with native gray hashes checked for every used frame."
+  },
+  "jetson_execution_limits": {"workers": 1, "phase_deadline_seconds": 900, "batch_deadline_seconds": 3600, "start_below_celsius": 65, "stop_at_celsius": 75, "automatic_retries": 0},
+  "restrictions": ["No RAW16 media", "No sealed holdout media", "No clocks/sudo/install/reboot", "No coordinate-specific masking to protect known targets", "No threshold relaxation or forced identity motion", "No production promotion without explicit evidence", "No performance improvement claim from diagnostic instrumentation", "No unsupported airborne class or false-positive labels"],
+  "decision_policy": "Record each gate result honestly. Failure of a control or regression stops that candidate, not unrelated safe audits. Missing independent labels are a reported evaluation limitation, not invented ground truth."
+}

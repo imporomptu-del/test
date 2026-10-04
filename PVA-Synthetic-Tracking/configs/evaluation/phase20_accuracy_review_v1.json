@@ -1,0 +1,24 @@
+{
+  "schema": "seaqr.source-only-review-plan.v1",
+  "purpose": "Development accuracy pilot; no detector settings, no sealed holdout access",
+  "target_definition": "Provisional appearance-only: independently moving compact image feature; physical class unknown. Target-class decision pending user clarification.",
+  "selection": "Three previously source-reviewed encounters are densified. Six additional windows use fixed frame indices 100/300/500 and source-normalized centers (1/4,1/6), (1/2,1/2), (3/4,5/6), independently of proposal locations. This is purposive development sampling, not random or blind validation; reviewer has prior proposal-review exposure.",
+  "negative_policy": "No absence labels from overview/downsampled images. All native pixels and every frame of the bounded crop must be reviewed. Ambiguity stays unknown. No whole-clip negative labels or dataset-wide error rates.",
+  "sources": [
+    {"clip_id": "0029", "path": "/Users/romanmaksymiuk/Documents/SEAQR/outputs/jetson_review_clips_20260913/chunk_0029.avi", "sha256": "0330bc3e390a793c2bf6afe7b16720ad3cd6bb8943ee162caf9ce6eff800f359", "frames": 687, "shape_hw": [3190, 4784], "fps": 10},
+    {"clip_id": "0126", "path": "/Users/romanmaksymiuk/Documents/SEAQR/outputs/jetson_review_clips_20260913/chunk_0126.avi", "sha256": "c5302b873656793da47f1da3c03f05df595f17c3f9bc407ce0bfd99b7e718344", "frames": 674, "shape_hw": [3190, 4784], "fps": 10},
+    {"clip_id": "0055", "path": "/Users/romanmaksymiuk/Documents/SEAQR/outputs/v7_frozen_evaluation_20260913/sources/chunk_0055.avi", "sha256": "c59abb3dad5c8787aab8a5a86eff466928a918be79a536960a7713d8a5dc539f", "frames": 689, "shape_hw": [3190, 4784], "fps": 10},
+    {"clip_id": "0082", "path": "/Users/romanmaksymiuk/Documents/SEAQR/outputs/v7_frozen_evaluation_20260913/sources/chunk_0082.avi", "sha256": "465ba7b00393e655534f78d9be07aa965d6d404c1761b4d0e0841c1766bce117", "frames": 691, "shape_hw": [3190, 4784], "fps": 10}
+  ],
+  "windows": [
+    {"id": "029_A_intermittent", "clip_id": "0029", "first": 70, "last": 81, "crop_xywh": [1380, 2450, 256, 192], "selection": "known-positive densification"},
+    {"id": "029_B_turn", "clip_id": "0029", "first": 270, "last": 281, "crop_xywh": [2590, 2800, 256, 192], "selection": "known-positive densification"},
+    {"id": "126_motion", "clip_id": "0126", "first": 140, "last": 151, "crop_xywh": [2700, 2800, 256, 192], "selection": "known-positive densification"},
+    {"id": "055_upper", "clip_id": "0055", "first": 100, "last": 111, "crop_xywh": [1068, 436, 256, 192], "selection": "fixed source-only grid"},
+    {"id": "055_middle", "clip_id": "0055", "first": 300, "last": 311, "crop_xywh": [2264, 1499, 256, 192], "selection": "fixed source-only grid"},
+    {"id": "055_lower", "clip_id": "0055", "first": 500, "last": 511, "crop_xywh": [3460, 2562, 256, 192], "selection": "fixed source-only grid"},
+    {"id": "082_upper", "clip_id": "0082", "first": 100, "last": 111, "crop_xywh": [1068, 436, 256, 192], "selection": "fixed source-only grid"},
+    {"id": "082_middle", "clip_id": "0082", "first": 300, "last": 311, "crop_xywh": [2264, 1499, 256, 192], "selection": "fixed source-only grid"},
+    {"id": "082_lower", "clip_id": "0082", "first": 500, "last": 511, "crop_xywh": [3460, 2562, 256, 192], "selection": "fixed source-only grid"}
+  ]
+}

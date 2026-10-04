@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "purpose": "Reviewed development clips only; not untouched generalization data",
+  "clips": [
+    {
+      "clip_id": "chunk0029",
+      "source_name": "chunk_0029.avi",
+      "source_sha256": "0330bc3e390a793c2bf6afe7b16720ad3cd6bb8943ee162caf9ce6eff800f359",
+      "annotations": "results/tiny_target/phase19/chunk0029_visual_review_20260913/visual_annotations.json"
+    },
+    {
+      "clip_id": "chunk0126",
+      "source_name": "chunk_0126.avi",
+      "source_sha256": "c5302b873656793da47f1da3c03f05df595f17c3f9bc407ce0bfd99b7e718344",
+      "annotations": "results/tiny_target/phase19/chunk0126_avi_20260913/visual_review/visual_annotations.json"
+    }
+  ]
+}

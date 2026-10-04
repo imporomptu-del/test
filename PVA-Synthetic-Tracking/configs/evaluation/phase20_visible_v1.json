@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "input_bit_depth": 8,
+  "motion_backend": "cpu_translation",
+  "tile_size": 256,
+  "noise_floor_dn": 0.5,
+  "temporal_threshold_sigma": 4.0,
+  "spatial_threshold_sigma": 3.0,
+  "background_alpha": 0.05,
+  "warmup_frames": 8,
+  "position_sigma_px": 2.0,
+  "initial_velocity_sigma_px_s": 150.0,
+  "acceleration_sigma_px_s2": 60.0,
+  "position_gate_px": 45.0,
+  "mahalanobis_gate_squared": 25.0,
+  "confirmation_hits": 4,
+  "coast_seconds": 0.7,
+  "minimum_moving_excursion_px": 12.0
+}

@@ -1,0 +1,163 @@
+{
+  "schema": "seaqr.feature-selection.plan.v1",
+  "date": "2026-09-29",
+  "purpose": "One bounded spatial feature-selection candidate. No production promotion, threshold search, or independent accuracy claim.",
+  "allowed_clip_ids": [
+    "0170",
+    "0240"
+  ],
+  "native_input": {
+    "width": 4784,
+    "height": 3190,
+    "bit_depth": 8,
+    "frames_per_clip": 673,
+    "nominal_fps": 10,
+    "crop": null,
+    "frame_stride": 1
+  },
+  "candidate": {
+    "harris_gain": 16,
+    "harris_capacity_policy": "complete_grid",
+    "feature_image_scale": 0.5,
+    "feature_cpu_policy": "batched_exact_v1",
+    "max_features": 384,
+    "max_features_per_cell": 8,
+    "grid_rows": 6,
+    "grid_cols": 8
+  },
+  "rationale": "Strongest eight eligible points per unchanged spatial cell; explicit global limit is 48 cells times eight. This is a quota algorithm change, not proof the selected corners are static background. Exact CPU batching must match the reference path under the same new quota.",
+  "unchanged": [
+    "Harris U32-to-float32 score semantics",
+    "native-image saturation, mask and border eligibility",
+    "PVA LK image and forward/backward gates",
+    "minimum 30 accepted features",
+    "global motion model, residual, inlier and spatial gates",
+    "detector and tracker thresholds",
+    "reset/warmup policy",
+    "native coverage",
+    "clock policy"
+  ],
+  "forbidden": [
+    "RAW16 media",
+    "sealed holdout media",
+    "threshold sweeps",
+    "zero-motion fallback",
+    "unverified background assumptions",
+    "blanket post-reset suppression",
+    "production promotion",
+    "overwriting prior evidence",
+    "sudo or clock writes"
+  ],
+  "preflight": {
+    "per_clip": true,
+    "cpu_parity": {
+      "policies": [
+        "reference",
+        "batched_exact_v1"
+      ],
+      "same_quota": true,
+      "cases": [
+        "native_gray8",
+        "masked_and_excluded_gray8",
+        "empty",
+        "all_ineligible",
+        "native_proxy_boundaries"
+      ],
+      "requirements": [
+        "same eligibility, selected indices, reason counts and grid coverage",
+        "boundary, tied float32 scores, nonfinite, mask and exclusion cases",
+        "input immutability",
+        "maximum 384 points and eight per cell"
+      ],
+      "runtime": "Execute under Jetson installed NumPy as well as local tests."
+    },
+    "generated_controls": [
+      "low_contrast_static",
+      "low_contrast_translated",
+      "flat_static"
+    ],
+    "seed": 20260927,
+    "nonflat": {
+      "dimensions_wh": [
+        640,
+        512
+      ],
+      "intensity_range": [
+        120,
+        135
+      ],
+      "translation_xy": [
+        4,
+        -2
+      ],
+      "original_global_gates_must_pass": true,
+      "interior_margin_px": 128,
+      "minimum_interior_points": 30,
+      "maximum_vector_error_px": 0.1,
+      "maximum_median_point_error_px": 0.1,
+      "maximum_point_error_px": 0.5
+    },
+    "flat": "Expected unavailable zero Harris features, not runtime failure.",
+    "conversion": "All U8 values map exactly to S16 times16, range0–4080."
+  },
+  "execution": {
+    "workers": 1,
+    "phase_deadline_seconds": 900,
+    "batch_deadline_seconds": 3600,
+    "start_below_celsius": 65,
+    "stop_at_celsius": 75,
+    "automatic_retries": 0,
+    "scope": "Both per-clip preflights before either full causal run."
+  },
+  "comparison": {
+    "arms": [
+      "original frozen baseline",
+      "previous gain16 complete-capacity feature-supply candidate",
+      "new spatial quota and exact CPU candidate"
+    ],
+    "readiness_target_fraction_each_clip": 0.95,
+    "pva_runtime_errors_allowed": 0,
+    "positive_clip": "0240",
+    "positive_frames_inclusive": [
+      430,
+      464
+    ],
+    "reference_sha256": "10d7ec68ba04b05784d4e19a56b0a6dbb561a9e44c7517513b7c1a3be5c881c3",
+    "reference_kind": "35 frozen baseline-derived actual coordinates, not independent ground truth or recall.",
+    "retention": "All35 must be ready qualified actual dark measurements within8 native pixels under one coherent new identity. Predictions do not count.",
+    "burst_frames_inclusive": [
+      50,
+      105
+    ],
+    "burst_interpretation": "Unlabeled mixture, including compact moving feature; M/P counts are review workload, not false positives.",
+    "runtime": "Current-clock cross-run diagnostic; nested stage timers overlap and are not additive wall shares."
+  },
+  "stages": [
+    "Local generated tests and source review; freeze single candidate.",
+    "Jetson generated parity and motion controls, then full0170 and0240 sequentially.",
+    "Compare all three arms; stop if readiness or coherent target gate fails, without tuning.",
+    "Only if pair passes, separately freeze and validate four older approved reference clips with no new reference losses; no automatic promotion."
+  ],
+  "review": {
+    "windows": [
+      [
+        50,
+        105
+      ],
+      [
+        430,
+        464
+      ]
+    ],
+    "all_qualified_states": true,
+    "prediction_distinguished_from_measurement": true,
+    "availability_visible": true,
+    "clutter_suppression": "Separate future experiment; do not hide this candidate's outputs."
+  },
+  "prior_evidence": {
+    "workspace": "/tmp/seaqr_feature_supply_20260929_BLW0as",
+    "freeze_sha256": "5107ff906f93f9033c2d8a12dd1be2b1da2779e8211ce20a0327dd9bf18e3022",
+    "archive_sha256": "4c70a9ae5b3ee5f4e1e03b8baffeb9f47f213667d4885f79b04406da3be2fc49"
+  },
+  "promotion_allowed": false
+}

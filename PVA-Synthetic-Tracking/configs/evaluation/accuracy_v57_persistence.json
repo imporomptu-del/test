@@ -1,0 +1,14 @@
+{
+  "schema": "seaqr.accuracy_v57.config.v1",
+  "config": {
+    "required_consecutive_edges": 2,
+    "maximum_edge_gap_ns": 200000000,
+    "maximum_coast_frames": 7,
+    "maximum_coast_ns": 700000000
+  },
+  "production_changed": false,
+  "promotion_allowed": false,
+  "parameter_sweep": false,
+  "reference_panels": {"dense": 285, "pilot": 28, "anchor": 24, "compact_light": 8, "grid": 11},
+  "known_counterexample_blocks_promotion": true
+}
